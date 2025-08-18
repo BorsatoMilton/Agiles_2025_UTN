@@ -27,3 +27,11 @@ describe("Sumador con un numero solo y un espacio", () => {
     expect(sumador.sumar()).toBe(4);
   });
 });
+
+describe("String vacio suma 0", () => {
+  let sumador = new Sumador(" ");
+
+  it("Sumar con un numero solo", () => {
+    expect(sumador.sumar()).toBe(0);
+  });
+});
