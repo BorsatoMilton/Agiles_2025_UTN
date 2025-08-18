@@ -11,3 +11,11 @@ describe("sumador dos numeros enteros", () => {
     expect(sumador.sumar()).toBe(3);
   });
 });
+
+describe("Sumador con un numero solo", () => {
+  let sumador = new Sumador("4");
+
+  it("Sumar con un numero solo", () => {
+    expect(sumador.sumar()).toBe(4);
+  });
+});
