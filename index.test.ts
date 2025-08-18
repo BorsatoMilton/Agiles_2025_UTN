@@ -19,3 +19,11 @@ describe("Sumador con un numero solo", () => {
     expect(sumador.sumar()).toBe(4);
   });
 });
+
+describe("Sumador con un numero solo y un espacio", () => {
+  let sumador = new Sumador("4, ");
+
+  it("Sumar con un numero solo", () => {
+    expect(sumador.sumar()).toBe(4);
+  });
+});

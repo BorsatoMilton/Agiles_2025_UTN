@@ -9,7 +9,7 @@ export class Sumador {
   public sumar(): number {
     const suma = this.texto
       .split(",")
-      .map((num) => parseInt(num))
+      .map((num) => (num.trim() !== "" ? parseInt(num) : 0))
       .reduce((acumulador, valor) => acumulador + valor, 0);
 
     return suma;
