@@ -35,3 +35,11 @@ describe("String vacio suma 0", () => {
     expect(sumador.sumar()).toBe(0);
   });
 });
+
+describe("NaN en el string", () => {
+  let sumador = new Sumador("1,s");
+
+  it("Sumar con un numero solo", () => {
+    expect(sumador.sumar()).toBe(NaN);
+  });
+});
