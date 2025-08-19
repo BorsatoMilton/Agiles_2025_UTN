@@ -43,3 +43,11 @@ describe("NaN en el string", () => {
     expect(sumador.sumar()).toBe(NaN);
   });
 });
+
+describe("Varios numeros enteros", () => {
+  let sumador = new Sumador("1,2,3,5,8,13");
+
+  it("Sumar con un numero solo", () => {
+    expect(sumador.sumar()).toBe(32);
+  });
+});
