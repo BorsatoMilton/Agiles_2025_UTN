@@ -46,4 +46,9 @@ describe("Ahorcado - Nuevos tests", () => {
     juego.adivinar_letra("x");
     expect(juego.get_cantidad_intentos_realizados()).toBe(1);
   });
+
+  it("Mantener cantidad de intentos si acierta la letra", () => {
+    juego.adivinar_letra("a");
+    expect(juego.get_cantidad_intentos_realizados()).toBe(1);
+  });
 });
