@@ -11,6 +11,11 @@ describe('Ahorcado', () => {
     expect(juego.adivinar_letra('p')).toBe(true);
     expect(juego.adivinar_letra('x')).toBe(false);
   });
+
+  it('deberia verificar si una letra ya fue ingresada', () => {
+    juego.adivinar_letra('p');
+    expect(juego.verificar_letra_ingresada('p')).toBe(true);
+  });
 });
 
 

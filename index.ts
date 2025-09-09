@@ -1,13 +1,12 @@
 export class Ahorcado {
     private palabraSecreta: string;
-    private letrasAdivinadas: Set<string>;
+    private letrasIngresadas: string[] = [];
     private intentosRestantes: number;   
     private maxIntentos: number; 
     
 
     constructor(palabraSecreta: string, maxIntentos: number = 6) {
         this.palabraSecreta = palabraSecreta.toLowerCase();
-        this.letrasAdivinadas = new Set();
         this.intentosRestantes = maxIntentos;
         this.maxIntentos = maxIntentos;
     }
@@ -17,14 +16,24 @@ export class Ahorcado {
     }
 
     public adivinar_letra(letra: string): boolean {
-        letra = letra.toLowerCase();
-        if (this.palabraSecreta.includes(letra)) {
-          return true;
+        if(!this.verificar_letra_ingresada(letra)) {
+          letra = letra.toLowerCase();
+          if (this.palabraSecreta.includes(letra)) {
+            this.letrasIngresadas.push(letra);
+            return true;
+          } else {
+            return false;
+          }  
         } else {
           return false;
         }
+        
     }
-}
+    public verificar_letra_ingresada(letra: string): boolean {
+        letra = letra.toLowerCase();
+        return this.letrasIngresadas.includes(letra);
+    }
+  }
 
 
 
