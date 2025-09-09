@@ -30,8 +30,15 @@ describe("Ahorcado - Nuevos tests", () => {
   });
 
   it("Palabra inicial con guiones", () => {
-    expect(juego.mostrar_palabra_inicial_usuario()).toBe(
+    expect(juego.mostrar_progreso_palabra()).toBe(
       "-".repeat(juego.guardar_palabra_secreta().length)
     ); //Mostraria "- - - - -"
+  });
+
+  it("Mostrar progreso de la palabra", () => {
+    juego.adivinar_letra("g");
+    expect(juego.mostrar_progreso_palabra()).toBe(
+      "g" + "-".repeat(juego.guardar_palabra_secreta().length - 1)
+    );
   });
 });

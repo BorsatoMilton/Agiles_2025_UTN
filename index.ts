@@ -39,7 +39,12 @@ export class Ahorcado {
     return this.letrasErradas.length;
   }
 
-  public mostrar_palabra_inicial_usuario(): string {
-    return "-".repeat(this.palabraSecreta.length);
-  }
+  public mostrar_progreso_palabra(): string {
+    return this.palabraSecreta
+      .split("")
+      .map((l) => (this.letrasAcertadas.includes(l) ? l : "-"))
+      .join("");
+  } // Explico la funcion por si no se entiende: Toma la palabraSecreta,
+  //  crea un array con sus letras (split), luego mapea con cada letra (map)
+  // y verifica si estan incluidas, si estan devuelve la letra, caso contrario devuelve "-", y finalmente une todo en un string (join).
 }
