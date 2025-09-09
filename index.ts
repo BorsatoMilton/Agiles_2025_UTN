@@ -38,4 +38,8 @@ export class Ahorcado {
   public get_cantidad_intentos_realizados(): number {
     return this.letrasErradas.length;
   }
+
+  public mostrar_palabra_inicial_usuario(): string {
+    return "-".repeat(this.palabraSecreta.length);
+  }
 }

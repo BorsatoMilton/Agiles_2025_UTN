@@ -28,4 +28,10 @@ describe("Ahorcado - Nuevos tests", () => {
   it("Iniciar contador nulo", () => {
     expect(juego.get_cantidad_intentos_realizados()).toBe(0);
   });
+
+  it("Palabra inicial con guiones", () => {
+    expect(juego.mostrar_palabra_inicial_usuario()).toBe(
+      "-".repeat(juego.guardar_palabra_secreta().length)
+    ); //Mostraria "- - - - -"
+  });
 });
