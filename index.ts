@@ -15,6 +15,15 @@ export class Ahorcado {
     public guardar_palabra_secreta(): string {
         return this.palabraSecreta;
     }
+
+    public adivinar_letra(letra: string): boolean {
+        letra = letra.toLowerCase();
+        if (this.palabraSecreta.includes(letra)) {
+          return true;
+        } else {
+          return false;
+        }
+    }
 }
 
 
