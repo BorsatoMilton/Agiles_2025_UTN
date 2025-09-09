@@ -41,4 +41,9 @@ describe("Ahorcado - Nuevos tests", () => {
       "g" + "-".repeat(juego.guardar_palabra_secreta().length - 1)
     );
   });
+
+  it("Sumar intento si erra la letra", () => {
+    juego.adivinar_letra("x");
+    expect(juego.get_cantidad_intentos_realizados()).toBe(1);
+  });
 });

@@ -24,6 +24,7 @@ export class Ahorcado {
         return true;
       } else {
         this.letrasErradas.push(letra);
+        this.intentosRealizados++;
         return false;
       }
     } else {
@@ -36,7 +37,7 @@ export class Ahorcado {
   }
 
   public get_cantidad_intentos_realizados(): number {
-    return this.letrasErradas.length;
+    return this.intentosRealizados;
   }
 
   public mostrar_progreso_palabra(): string {
