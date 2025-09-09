@@ -19,3 +19,13 @@ describe("Ahorcado", () => {
     expect(juego.adivinar_letra("x")).toBe(false);
   });
 });
+
+//Necesito una instancia nueva para no interferir con los otros tests
+
+describe("Ahorcado - Nuevos tests", () => {
+  let juego = new Ahorcado("gato", 0);
+
+  it("Iniciar contador nulo", () => {
+    expect(juego.get_cantidad_intentos_realizados()).toBe(0);
+  });
+});

@@ -3,12 +3,11 @@ export class Ahorcado {
   private letrasIngresadas: string[] = [];
   private letrasAcertadas: string[] = [];
   private letrasErradas: string[] = [];
-  private intentosRestantes: number;
+  private intentosRealizados: number = 0;
   private maxIntentos: number;
 
   constructor(palabraSecreta: string, maxIntentos: number = 6) {
     this.palabraSecreta = palabraSecreta.toLowerCase();
-    this.intentosRestantes = maxIntentos;
     this.maxIntentos = maxIntentos;
   }
 
@@ -34,5 +33,9 @@ export class Ahorcado {
   public verificar_letra_ingresada_repetida(letra: string): boolean {
     letra = letra.toLowerCase();
     return this.letrasIngresadas.includes(letra);
+  }
+
+  public get_cantidad_intentos_realizados(): number {
+    return this.letrasErradas.length;
   }
 }
