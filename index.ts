@@ -61,4 +61,8 @@ export class Ahorcado {
   public informar_letras_utilizadas(): string[] {
     return this.letrasIngresadas;
   }
+
+  public informar_intentos_restantes(): number {
+    return this.maxIntentos - this.intentosRealizados;
+  }
 }

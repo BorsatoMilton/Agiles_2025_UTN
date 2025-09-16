@@ -84,4 +84,8 @@ describe("Ahorcado - Test en progreso", () => {
   it("Deberia mostrar las letras utilizadas", () => {
     expect(juego.informar_letras_utilizadas()).toEqual(["l", "u"]);
   });
+
+  it("Deberia informar los intentos restantes", () => {
+    expect(juego.informar_intentos_restantes()).toBe(3);
+  });
 });
