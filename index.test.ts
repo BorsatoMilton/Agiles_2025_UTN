@@ -51,4 +51,33 @@ describe("Ahorcado - Nuevos tests", () => {
     juego.adivinar_letra("a");
     expect(juego.get_cantidad_intentos_realizados()).toBe(1);
   });
+
+  it("Deberia informar que el usuario gano", () => {
+    juego.adivinar_letra("t");
+    juego.adivinar_letra("o");
+    expect(juego.es_victoria_o_es_derrota()).toBe("victoria");
+  });
+  
+
+});
+
+describe("Ahorcado - Test de derrota", () => {
+  let juego = new Ahorcado("sol", 3);
+
+  it("Deberia informar que el usuario perdio", () => {
+    juego.adivinar_letra("x");
+    juego.adivinar_letra("y");
+    juego.adivinar_letra("z");
+    expect(juego.es_victoria_o_es_derrota()).toBe("derrota");
+  });
+});
+
+describe("Ahorcado - Test en progreso", () => {
+  let juego = new Ahorcado("luna", 3);
+
+  it("Deberia informar que el juego esta en progreso", () => {
+    juego.adivinar_letra("l");
+    juego.adivinar_letra("u");
+    expect(juego.es_victoria_o_es_derrota()).toBe("en progreso");
+  });
 });
