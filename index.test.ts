@@ -80,4 +80,8 @@ describe("Ahorcado - Test en progreso", () => {
     juego.adivinar_letra("u");
     expect(juego.es_victoria_o_es_derrota()).toBe("en progreso");
   });
+
+  it("Deberia mostrar las letras utilizadas", () => {
+    expect(juego.informar_letras_utilizadas()).toEqual(["l", "u"]);
+  });
 });

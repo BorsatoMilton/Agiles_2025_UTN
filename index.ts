@@ -57,4 +57,8 @@ export class Ahorcado {
     }
     return "en progreso";
   }
+
+  public informar_letras_utilizadas(): string[] {
+    return this.letrasIngresadas;
+  }
 }
