@@ -82,6 +82,10 @@ export class Ahorcado {
     return false;
   }
 
+  public letras_erradas(): string[] {
+    return this.letrasErradas;
+  }
+
   private pedir_nueva_palabra_secreta(): void {
     const nuevaPalabra = prompt("Ingrese una nueva palabra secreta:");
     if (nuevaPalabra) {
