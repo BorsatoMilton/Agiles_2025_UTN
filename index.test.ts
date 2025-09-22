@@ -110,4 +110,9 @@ describe("Ahorcado - Mostrar letras acertadas", () => {
   it("Deberia mostrar las letras acertadas", () => {
     expect(juego.mostrar_letras_acertadas()).toEqual(["b", "a"]);
   });
+
+  it("deberia informar letras erradas", () => {
+    expect(juego.letras_erradas()).toEqual(["x"]);
+  });
+
 });
