@@ -65,6 +65,10 @@ export class Ahorcado {
     return this.maxIntentos - this.intentosRealizados;
   }
 
+  public mostrar_letras_acertadas(): string[] {
+    return this.letrasAcertadas;
+  }
+
   public reiniciar_juego(confirmacion: boolean): boolean {
     if (confirmacion) {
       this.letrasIngresadas = [];
