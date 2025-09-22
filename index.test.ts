@@ -100,3 +100,14 @@ describe("Ahorcado - Reiniciar juego", () => {
     expect(juego.reiniciar_juego(true)).toBe(true);
   });
 });
+
+describe("Ahorcado - Mostrar letras acertadas", () => {
+  let juego = new Ahorcado("barco", 5);
+  juego.adivinar_letra("b");
+  juego.adivinar_letra("a");
+  juego.adivinar_letra("x"); // Letra errada
+
+  it("Deberia mostrar las letras acertadas", () => {
+    expect(juego.mostrar_letras_acertadas()).toEqual(["b", "a"]);
+  });
+});
