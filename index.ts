@@ -48,11 +48,10 @@ export class Ahorcado {
   } // Explico la funcion por si no se entiende: Toma la palabraSecreta,
   //  crea un array con sus letras (split), luego mapea con cada letra (map)
   // y verifica si estan incluidas, si estan devuelve la letra, caso contrario devuelve "-", y finalmente une todo en un string (join).
-  public es_victoria_o_es_derrota (): "victoria" | "derrota" | "en progreso" {
+  public es_victoria_o_es_derrota(): "victoria" | "derrota" | "en progreso" {
     if (this.mostrar_progreso_palabra() === this.palabraSecreta) {
       return "victoria";
-    }
-    else if (this.intentosRealizados >= this.maxIntentos) {
+    } else if (this.intentosRealizados >= this.maxIntentos) {
       return "derrota";
     }
     return "en progreso";
@@ -64,5 +63,29 @@ export class Ahorcado {
 
   public informar_intentos_restantes(): number {
     return this.maxIntentos - this.intentosRealizados;
+  }
+
+  public reiniciar_juego(confirmacion: boolean): boolean {
+    if (confirmacion) {
+      this.letrasIngresadas = [];
+      this.letrasAcertadas = [];
+      this.letrasErradas = [];
+      this.intentosRealizados = 0;
+      this.maxIntentos = 6;
+      //this.pedir_nueva_palabra_secreta(); // Se deberia descomentar debido a que pide input por consola, o bien tener un archivo con varios palabras, mas adelante lo implementaremos.
+      return true;
+    }
+    return false;
+  }
+
+  private pedir_nueva_palabra_secreta(): void {
+    const nuevaPalabra = prompt("Ingrese una nueva palabra secreta:");
+    if (nuevaPalabra) {
+      this.palabraSecreta = nuevaPalabra.toLowerCase();
+    } else {
+      console.log(
+        "No se ingresó una palabra válida. La palabra secreta no se ha cambiado."
+      );
+    }
   }
 }
