@@ -57,8 +57,6 @@ describe("Ahorcado - Nuevos tests", () => {
     juego.adivinar_letra("o");
     expect(juego.es_victoria_o_es_derrota()).toBe("victoria");
   });
-  
-
 });
 
 describe("Ahorcado - Test de derrota", () => {
@@ -87,5 +85,18 @@ describe("Ahorcado - Test en progreso", () => {
 
   it("Deberia informar los intentos restantes", () => {
     expect(juego.informar_intentos_restantes()).toBe(3);
+  });
+});
+
+// Reiniciar juego, hago una instancia completa con el juego ganado
+
+describe("Ahorcado - Reiniciar juego", () => {
+  let juego = new Ahorcado("casa", 5);
+  juego.adivinar_letra("c");
+  juego.adivinar_letra("a");
+  juego.adivinar_letra("s");
+
+  it("Deberia reiniciar el juego", () => {
+    expect(juego.reiniciar_juego(true)).toBe(true);
   });
 });
