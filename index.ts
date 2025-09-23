@@ -86,6 +86,10 @@ export class Ahorcado {
     return this.letrasErradas;
   }
 
+  public no_permitir_ingresar_letras_si_el_juego_finalizo(): boolean {
+    return this.es_victoria_o_es_derrota() !== "en progreso";
+  }
+
   private pedir_nueva_palabra_secreta(): void {
     const nuevaPalabra = prompt("Ingrese una nueva palabra secreta:");
     if (nuevaPalabra) {

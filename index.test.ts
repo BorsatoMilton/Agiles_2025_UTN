@@ -116,7 +116,10 @@ describe("Ahorcado - Mostrar letras acertadas", () => {
   });
 
   it("no deberia permitir ingresar letras si el juego finalizo", () => {
-    expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(false);
+    juego.adivinar_letra("r");
+    juego.adivinar_letra("c");
+    juego.adivinar_letra("o");
+    expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(true);
   });
 
 });
