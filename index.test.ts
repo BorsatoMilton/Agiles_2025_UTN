@@ -115,4 +115,8 @@ describe("Ahorcado - Mostrar letras acertadas", () => {
     expect(juego.letras_erradas()).toEqual(["x"]);
   });
 
+  it("no deberia permitir ingresar letras si el juego finalizo", () => {
+    expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(false);
+  });
+
 });
