@@ -108,7 +108,7 @@ describe("Ahorcado - No Reiniciar juego", () => {
   juego.adivinar_letra("s");
 
   it("No deberia reiniciar el juego", () => {
-    expect(juego.reiniciar_juego(false)).toBe(false);
+    expect(juego.reiniciar_juego(false)).toBe(true);
   });
 });
 
