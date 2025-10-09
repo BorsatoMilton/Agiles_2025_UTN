@@ -101,6 +101,17 @@ describe("Ahorcado - Reiniciar juego", () => {
   });
 });
 
+describe("Ahorcado - No Reiniciar juego", () => {
+  let juego = new Ahorcado("casa", 5);
+  juego.adivinar_letra("c");
+  juego.adivinar_letra("a");
+  juego.adivinar_letra("s");
+
+  it("No deberia reiniciar el juego", () => {
+    expect(juego.reiniciar_juego(false)).toBe(false);
+  });
+});
+
 describe("Ahorcado - Mostrar letras acertadas", () => {
   let juego = new Ahorcado("barco", 5);
   juego.adivinar_letra("b");
@@ -121,5 +132,4 @@ describe("Ahorcado - Mostrar letras acertadas", () => {
     juego.adivinar_letra("o");
     expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(true);
   });
-
 });
