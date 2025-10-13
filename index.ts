@@ -1,3 +1,4 @@
+import spanish from './spanish.json';
 export class Ahorcado {
   private palabraSecreta: string;
   private letrasIngresadas: string[] = [];
@@ -11,7 +12,7 @@ export class Ahorcado {
     this.maxIntentos = maxIntentos;
   }
 
-  public guardar_palabra_secreta(): string {
+  public informar_palabra_secreta(): string {
     return this.palabraSecreta;
   }
 
@@ -90,14 +91,10 @@ export class Ahorcado {
     return this.es_victoria_o_es_derrota() !== "en progreso";
   }
 
-  private pedir_nueva_palabra_secreta(): void {
-    const nuevaPalabra = prompt("Ingrese una nueva palabra secreta:");
-    if (nuevaPalabra) {
-      this.palabraSecreta = nuevaPalabra.toLowerCase();
-    } else {
-      console.log(
-        "No se ingresó una palabra válida. La palabra secreta no se ha cambiado."
-      );
-    }
+  public nueva_palabra_secreta(): void {
+    const palabras = spanish.palabras;
+    const palabraAleatoria =
+      palabras[Math.floor(Math.random() * palabras.length)];
+    this.palabraSecreta = palabraAleatoria.toLowerCase();
   }
 }
