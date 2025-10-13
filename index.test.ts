@@ -2,8 +2,8 @@ import { Ahorcado } from "./index";
 
 describe("Ahorcado", () => {
   let juego = new Ahorcado("perro", 7);
-  it("debería guardar la palabra secreta correctamente", () => {
-    expect(juego.guardar_palabra_secreta()).toBe("perro");
+  it("debería informar la palabra secreta correctamente", () => {
+    expect(juego.informar_palabra_secreta()).toBe("perro");
   });
 
   it("debería adivinar una letra correctamente", () => {
@@ -31,14 +31,14 @@ describe("Ahorcado - Nuevos tests", () => {
 
   it("Palabra inicial con guiones", () => {
     expect(juego.mostrar_progreso_palabra()).toBe(
-      "-".repeat(juego.guardar_palabra_secreta().length)
+      "-".repeat(juego.informar_palabra_secreta().length)
     ); //Mostraria "- - - - -"
   });
 
   it("Mostrar progreso de la palabra", () => {
     juego.adivinar_letra("g");
     expect(juego.mostrar_progreso_palabra()).toBe(
-      "g" + "-".repeat(juego.guardar_palabra_secreta().length - 1)
+      "g" + "-".repeat(juego.informar_palabra_secreta().length - 1)
     );
   });
 
@@ -131,5 +131,12 @@ describe("Ahorcado - Mostrar letras acertadas", () => {
     juego.adivinar_letra("c");
     juego.adivinar_letra("o");
     expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(true);
+  });
+  describe("Deberia tomar una palabra aleatoria del array de palabras", () => {
+    let juego = new Ahorcado("", 5);
+    juego.nueva_palabra_secreta();
+    it("La palabra no deberia ser vacia", () => {
+      expect(juego.informar_palabra_secreta().length).toBeGreaterThan(0);
+    });
   });
 });
