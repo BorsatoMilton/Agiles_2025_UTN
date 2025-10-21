@@ -1,4 +1,4 @@
-import { Ahorcado } from "./index";
+import { Ahorcado } from "./ahorcado";
 
 describe("Ahorcado", () => {
   let juego = new Ahorcado("perro", 7);
