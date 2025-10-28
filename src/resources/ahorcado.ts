@@ -1,3 +1,4 @@
+// @ts-ignore: allow importing JSON without enabling "resolveJsonModule" in tsconfig
 import spanish from './spanish.json';
 export class Ahorcado {
   private palabraSecreta: string;
@@ -43,19 +44,19 @@ export class Ahorcado {
 
   public mostrar_progreso_palabra(): string {
     return this.palabraSecreta
-      .split("")
-      .map((l) => (this.letrasAcertadas.includes(l) ? l : "-"))
-      .join("");
+      .split('')
+      .map((l) => (this.letrasAcertadas.includes(l) ? l : '-'))
+      .join('');
   } // Explico la funcion por si no se entiende: Toma la palabraSecreta,
   //  crea un array con sus letras (split), luego mapea con cada letra (map)
   // y verifica si estan incluidas, si estan devuelve la letra, caso contrario devuelve "-", y finalmente une todo en un string (join).
-  public es_victoria_o_es_derrota(): "victoria" | "derrota" | "en progreso" {
+  public es_victoria_o_es_derrota(): 'victoria' | 'derrota' | 'en progreso' {
     if (this.mostrar_progreso_palabra() === this.palabraSecreta) {
-      return "victoria";
+      return 'victoria';
     } else if (this.intentosRealizados >= this.maxIntentos) {
-      return "derrota";
+      return 'derrota';
     }
-    return "en progreso";
+    return 'en progreso';
   }
 
   public informar_letras_utilizadas(): string[] {
@@ -88,13 +89,12 @@ export class Ahorcado {
   }
 
   public no_permitir_ingresar_letras_si_el_juego_finalizo(): boolean {
-    return this.es_victoria_o_es_derrota() !== "en progreso";
+    return this.es_victoria_o_es_derrota() !== 'en progreso';
   }
 
   public nueva_palabra_secreta(): void {
     const palabras = spanish.palabras;
-    const palabraAleatoria =
-      palabras[Math.floor(Math.random() * palabras.length)];
+    const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
     this.palabraSecreta = palabraAleatoria.toLowerCase();
   }
 }
