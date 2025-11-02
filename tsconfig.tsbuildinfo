@@ -1,0 +1,1 @@
+{"root":["./src/main.server.ts","./src/main.ts","./src/server.ts","./src/app/app.config.server.ts","./src/app/app.config.ts","./src/app/app.routes.server.ts","./src/app/app.routes.ts","./src/app/app.ts","./src/resources/ahorcado.test.ts","./src/resources/ahorcado.ts","./features/step_definitions/stepdefs.ts"],"version":"5.9.3"}
