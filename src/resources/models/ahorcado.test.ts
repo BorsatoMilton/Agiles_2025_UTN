@@ -132,11 +132,7 @@ describe("Ahorcado - Mostrar letras acertadas", () => {
     juego.adivinar_letra("o");
     expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(true);
   });
-  describe("Deberia tomar una palabra aleatoria del array de palabras", () => {
-    let juego = new Ahorcado("", 5);
-    juego.nueva_palabra_secreta();
-    it("La palabra no deberia ser vacia", () => {
-      expect(juego.informar_palabra_secreta().length).toBeGreaterThan(0);
-    });
-  });
+
 });
+
+

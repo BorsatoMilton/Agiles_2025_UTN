@@ -5,5 +5,11 @@
     "types": ["jest", "node"],
     "composite": true
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.test.ts", "src/**/*.d.ts", "setup-jest.ts"]
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "setup-jest.ts"
+  ]
 }

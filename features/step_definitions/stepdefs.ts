@@ -1,6 +1,6 @@
 import assert from 'assert';
 import { Given, When, Then } from '@cucumber/cucumber';
-import { Ahorcado } from '../../src/resources/ahorcado';
+import { Ahorcado } from '../../src/resources/models/ahorcado';
 
 let ahorcado: Ahorcado;
 const letras = ['M', 'A', 'N', 'Z'];

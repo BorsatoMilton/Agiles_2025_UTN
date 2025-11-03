@@ -1,5 +1,5 @@
 // @ts-ignore: allow importing JSON without enabling "resolveJsonModule" in tsconfig
-import spanish from './spanish.json';
+
 export class Ahorcado {
   private palabraSecreta: string;
   private letrasIngresadas: string[] = [];
@@ -13,10 +13,11 @@ export class Ahorcado {
     this.maxIntentos = maxIntentos;
   }
 
-  public informar_palabra_secreta(): string {
-    return this.palabraSecreta;
+  async establecer_juego(idioma: string, dificultad: string): Promise<void> {
+    const palabra = await this.nueva_palabra_secreta(idioma, dificultad);
+    this.constructor(palabra);
   }
-
+  
   public adivinar_letra(letra: string): boolean {
     if (!this.verificar_letra_ingresada_repetida(letra)) {
       letra = letra.toLowerCase();
@@ -67,6 +68,10 @@ export class Ahorcado {
     return this.maxIntentos - this.intentosRealizados;
   }
 
+  public informar_palabra_secreta(): string {
+    return this.palabraSecreta;
+  }
+
   public mostrar_letras_acertadas(): string[] {
     return this.letrasAcertadas;
   }
@@ -92,9 +97,9 @@ export class Ahorcado {
     return this.es_victoria_o_es_derrota() !== 'en progreso';
   }
 
-  public nueva_palabra_secreta(): void {
-    const palabras = spanish.palabras;
+  public async nueva_palabra_secreta(idioma: string = 'spanish', dificultad: string = 'easy'): Promise<string> {
+    const palabras = await import(`../languages/${idioma}-${dificultad}-words.json`);
     const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
-    this.palabraSecreta = palabraAleatoria.toLowerCase();
+    return palabraAleatoria;
   }
 }

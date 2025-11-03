@@ -5,5 +5,5 @@
     "target": "ES2022",
     "esModuleInterop": true
   },
-  "include": ["src/**/*.ts", "features/**/*.ts"]
+  "include": ["src/**/*.ts", "features/**/*.ts", "tests/**/*.ts"]
 }
