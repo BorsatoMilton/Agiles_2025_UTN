@@ -1,0 +1,191 @@
+:root {
+  --bg: #f6f8fb;
+  --card-bg: #ffffff;
+  --primary: #1976d2; /* Material blue 700 */
+  --accent: #00bcd4;
+  --warn: #d32f2f;
+  --text: #263238;
+  --muted: #6c7a89;
+  --glass: rgba(255, 255, 255, 0.6);
+  --shadow: 0 8px 24px rgba(34, 40, 49, 0.08);
+  --radius: 14px;
+  --gap: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+  color: var(--text);
+}
+
+/* Contenedor general centrado */
+.ahorcado-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+}
+
+/* Card principal */
+.ahorcado-card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
+  border: 1px solid rgba(20, 26, 32, 0.04);
+}
+
+/* Título */
+.ahorcado-card h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.2px;
+  font-weight: 600;
+}
+
+/* Area de la palabra secreta */
+.palabra-secreta {
+  margin-top: 6px;
+  padding: 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(25, 118, 210, 0.03), rgba(0, 0, 0, 0));
+  border: 1px dashed rgba(25, 118, 210, 0.08);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.6rem;
+  text-align: center;
+  letter-spacing: 10px; /* espacio entre caracteres para imitar huecos */
+  color: var(--text);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+}
+
+/* Input area (alineacion con Material inputs) */
+.input-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Ajuste al mat-form-field si querés forzar ancho del input */
+.letra-field {
+  width: 120px;
+  max-width: 40%;
+  min-width: 120px;
+}
+
+/* Si el mat-form-field tiene input interno, forzamos centrado */
+.letra-field input[matInput] {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 12px 8px;
+  letter-spacing: 2px;
+}
+
+/* Botones - se apoyan en estilos de Angular Material, pero añadimos separación */
+button[mat-raised-button],
+button[mat-stroked-button] {
+  min-width: 120px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Info del juego */
+.info-row {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 6px;
+}
+
+.info-row p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.info-row strong {
+  color: var(--text);
+}
+
+/* Lista de letras usadas */
+.letras-usadas,
+.info-row span {
+  display: inline-block;
+  margin-left: 6px;
+  font-family: 'Courier New', monospace;
+  color: #2b3a42;
+}
+
+/* Reiniciar / Salir */
+.reiniciar {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+/* Estado de intento crítico */
+.intentos-restantes-bajo {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+/* Pequeñas ayudas visuales */
+.palabra-secreta::after {
+  content: '';
+  display: block;
+  height: 6px;
+  margin-top: 10px;
+  width: 40%;
+  opacity: 0.03;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsividad */
+@media (max-width: 520px) {
+  .ahorcado-card {
+    padding: 18px;
+    border-radius: 12px;
+  }
+  .palabra-secreta {
+    font-size: 1.2rem;
+    letter-spacing: 6px;
+    min-height: 60px;
+  }
+  .letra-field {
+    width: 92px;
+    min-width: 92px;
+  }
+  button[mat-raised-button],
+  button[mat-stroked-button] {
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+  .reiniciar {
+    justify-content: center;
+  }
+}

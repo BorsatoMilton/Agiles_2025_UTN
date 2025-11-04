@@ -1,4 +1,8 @@
 // @ts-ignore: allow importing JSON without enabling "resolveJsonModule" in tsconfig
+interface Palabra {
+  id: number;
+  solution: string;
+}
 
 export class Ahorcado {
   private palabraSecreta: string = '';
@@ -52,7 +56,7 @@ export class Ahorcado {
   public mostrar_progreso_palabra(): string {
     return this.palabraSecreta
       .split('')
-      .map((l) => (this.letrasAcertadas.includes(l) ? l : '-'))
+      .map((l) => (this.letrasAcertadas.includes(l) ? l : '_'))
       .join('');
   } // Explico la funcion por si no se entiende: Toma la palabraSecreta,
   //  crea un array con sus letras (split), luego mapea con cada letra (map)
@@ -107,8 +111,12 @@ export class Ahorcado {
     idioma: string = 'spanish',
     dificultad: string = 'easy'
   ): Promise<string> {
-    const palabras = await import(`../languages/${idioma}-${dificultad}-words.json`);
+    const { default: lista } = await import(`../languages/${idioma}-${dificultad}-words.json`);
+
+    const palabras: Palabra[] = lista as Palabra[];
+
     const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
+
     return palabraAleatoria.solution.toLowerCase();
   }
 }

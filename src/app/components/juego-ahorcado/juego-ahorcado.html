@@ -1,0 +1,57 @@
+<div class="ahorcado-container">
+  <div class="ahorcado-card">
+    <h1>Juego del Ahorcado</h1>
+
+    <div class="palabra-secreta">
+      {{ this.juego.mostrar_progreso_palabra() }}
+    </div>
+
+    <div class="input-area">
+      <mat-form-field appearance="outline">
+        <mat-label>Ingresa una letra</mat-label>
+        <input
+          type="text"
+          matInput
+          minlength="1"
+          maxlength="1"
+          [(ngModel)]="letraIngresada"
+          (keyup.enter)="adivinarLetra(letraIngresada)"
+          aria-label="Ingresar letra"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="input-area">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="adivinarLetra(letraIngresada)"
+        [disabled]="verificarLetra(letraIngresada)"
+      >
+        Arriesgar
+      </button>
+    </div>
+
+    <!-- Información del juego -->
+    <div class="info-row">
+      <p>
+        <strong>Letras usadas:</strong>
+        <span>{{ letrasUtilizadas.join(', ') }}</span>
+      </p>
+      <p>
+        <strong>Intentos restantes:</strong>
+        <span>{{ intentosRestantes }}</span>
+      </p>
+    </div>
+
+    <!-- Reiniciar -->
+    <div class="reiniciar">
+      <button mat-stroked-button color="accent" (click)="reiniciarJuego(true)">Reiniciar</button>
+      <button mat-stroked-button color="warn" (click)="reiniciarJuego(false)">Salir</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="dialogReinicio">
+  <app-dialog-reinicio></app-dialog-reinicio>
+</div>

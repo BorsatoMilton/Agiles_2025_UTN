@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { SelectorDificultadIdioma } from './components/selector-dificultad-idioma/selector-dificultad-idioma.js';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [SelectorDificultadIdioma],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
