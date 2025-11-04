@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.dialog-title {
+  text-align: center;
+  font-weight: 600;
+  color: #3f51b5;
+}
+
+.dialog-content {
+  padding: 20px;
+  text-align: center;
+  background: #f3f6fd;
+  border-radius: 10px;
+}
+
+.resultado-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.outcome-icon {
+  font-size: 2.5rem;
+}
+
+.estado {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.subtexto {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.palabra-secreta {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #673ab7;
+  margin-top: 2px;
+}
+
+.pregunta {
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-bottom: 10px;
+}
+
+.btn-no {
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 8px;
+}
+
+.btn-si {
+  background: #c8e6c9;
+  color: #256029;
+  border-radius: 8px;
+}
+
+button:hover {
+  opacity: 0.9;
+}

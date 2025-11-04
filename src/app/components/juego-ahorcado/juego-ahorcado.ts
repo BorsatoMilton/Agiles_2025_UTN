@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { DialogReinicio } from '../dialog-reinicio/dialog-reinicio.js';
+import { MatDialog } from '@angular/material/dialog';
+import { ComponentType } from '@angular/cdk/portal';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-juego-ahorcado',
@@ -18,7 +21,7 @@ import { DialogReinicio } from '../dialog-reinicio/dialog-reinicio.js';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    DialogReinicio,
+    MatDividerModule,
   ],
   templateUrl: './juego-ahorcado.html',
   styleUrl: './juego-ahorcado.css',
@@ -31,10 +34,23 @@ export class JuegoAhorcado implements OnInit {
   intentosRestantes!: number;
   letrasUtilizadas: string[] = [];
   letraIngresada: string = '';
-  dialogReinicio: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
     this.ngOnInit();
+  }
+
+  openDialog(dialog: ComponentType<unknown>, data: object): void {
+    const dialogRef = this.dialog.open(dialog, {
+      data: data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== 'none') {
+        this.reiniciarJuego(true);
+      } else {
+        this.reiniciarJuego(false);
+      }
+    });
   }
 
   async ngOnInit() {
@@ -63,12 +79,19 @@ export class JuegoAhorcado implements OnInit {
       this.intentosRestantes <= 0 ||
       this.palabraMostrada === this.juego.informar_palabra_secreta()
     ) {
-      this.dialogReinicio = true;
+      this.openDialog(DialogReinicio, {
+        resultado: this.juego.es_victoria_o_es_derrota(),
+        palabraSecreta: this.juego.informar_palabra_secreta(),
+      });
     }
   }
 
   verificarLetra(letra: string): boolean {
-    return this.juego.verificar_letra_ingresada_repetida(letra);
+    let decision = false;
+    if (letra.length !== 1 || this.juego.verificar_letra_ingresada_repetida(letra)) {
+      decision = true;
+    }
+    return decision;
   }
 
   reiniciarJuego(confirmation: boolean) {

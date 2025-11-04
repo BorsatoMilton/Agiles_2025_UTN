@@ -1,8 +1,9 @@
 <div class="ahorcado-container">
   <div class="ahorcado-card">
     <h1>Juego del Ahorcado</h1>
+    <mat-divider></mat-divider>
 
-    <div class="palabra-secreta">
+    <div class="palabra-secreta" style="margin-top: 20px; margin-bottom: 20px">
       {{ this.juego.mostrar_progreso_palabra() }}
     </div>
 
@@ -31,25 +32,21 @@
         Arriesgar
       </button>
     </div>
-
+    <mat-divider></mat-divider>
     <div class="info-row">
       <p>
-        <strong>Letras usadas:</strong>
-        <span>{{ letrasUtilizadas.join(', ') }}</span>
+        <strong>Letras usadas: </strong>
+        <span style="font-size: large">{{ letrasUtilizadas.join(' - ') }}</span>
       </p>
       <p>
-        <strong>Intentos restantes:</strong>
-        <span>{{ intentosRestantes }}</span>
+        <strong>Intentos restantes: </strong>
+        <span style="font-size: large">{{ intentosRestantes }}</span>
       </p>
     </div>
-
+    <mat-divider></mat-divider>
     <div class="reiniciar">
       <button mat-stroked-button color="accent" (click)="reiniciarJuego(true)">Reiniciar</button>
       <button mat-stroked-button color="warn" (click)="reiniciarJuego(false)">Salir</button>
     </div>
   </div>
-</div>
-
-<div *ngIf="dialogReinicio">
-  <app-dialog-reinicio></app-dialog-reinicio>
 </div>

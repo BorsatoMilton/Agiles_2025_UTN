@@ -1,7 +1,23 @@
-<h2 mat-dialog-title>Dialog with elements</h2>
-<mat-dialog-content
-  >This dialog showcases the title, close, content and actions elements.</mat-dialog-content
->
-<mat-dialog-actions>
-  <button matButton mat-dialog-close>Close</button>
+<h2 mat-dialog-title class="dialog-title">Juego finalizado</h2>
+
+<mat-dialog-content class="dialog-content" style="width: 500px">
+  <div class="resultado-wrap">
+    <span class="outcome-icon">
+      {{ resultado!.toLowerCase().includes('vic') ? '🎉' : '😞' }}
+    </span>
+    <div class="resultado-text">
+      <div class="estado">{{ resultado.toUpperCase() || 'RESULTADO DESCONOCIDO' }}</div>
+      <div class="subtexto">La palabra era:</div>
+      <div class="palabra-secreta">{{ palabraSecreta.toUpperCase() || '—' }}</div>
+    </div>
+  </div>
+
+  <p class="pregunta">¿Desea jugar nuevamente?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onClose()" class="btn-no" aria-label="No jugar">No</button>
+  <button mat-button (click)="reiniciarJuego()" class="btn-si" aria-label="Jugar de nuevo">
+    Sí
+  </button>
 </mat-dialog-actions>
