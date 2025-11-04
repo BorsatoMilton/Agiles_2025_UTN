@@ -3,16 +3,17 @@ import { Given, When, Then } from '@cucumber/cucumber';
 import { Ahorcado } from '../../src/resources/models/ahorcado';
 
 let ahorcado: Ahorcado;
-const letras = ['M', 'A', 'N', 'Z'];
+let palabra: string;
 
-Given('La palabra MANZANA', function () {
-  console.log('Given: La palabra MANZANA');
-  ahorcado = new Ahorcado('manzana');
+Given('Una palabra cualquiera', function () {
+  console.log('Given: Una palabra cualquiera');
+  ahorcado = new Ahorcado(undefined, 'spanish', 'easy');
 });
 
 When('Adivino todas las letras', function () {
   console.log('When: Adivino todas las letras');
-  letras.forEach((letra) => ahorcado.adivinar_letra(letra));
+  palabra = ahorcado.informar_palabra_secreta();
+  palabra.split('').forEach((letra) => ahorcado.adivinar_letra(letra));
 });
 
 Then('Deberia mostrarme que gane', function () {

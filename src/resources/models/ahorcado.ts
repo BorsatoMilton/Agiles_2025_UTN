@@ -1,23 +1,29 @@
 // @ts-ignore: allow importing JSON without enabling "resolveJsonModule" in tsconfig
 
 export class Ahorcado {
-  private palabraSecreta: string;
+  private palabraSecreta: string = '';
   private letrasIngresadas: string[] = [];
   private letrasAcertadas: string[] = [];
   private letrasErradas: string[] = [];
   private intentosRealizados: number = 0;
-  private maxIntentos: number;
+  private maxIntentos: number = 6;
 
-  constructor(palabraSecreta: string, maxIntentos: number = 6) {
-    this.palabraSecreta = palabraSecreta.toLowerCase();
-    this.maxIntentos = maxIntentos;
+  constructor(palabraSecreta?: string, idioma?: string, dificultad?: string) {
+    try {
+      if (palabraSecreta != undefined) {
+        this.palabraSecreta = palabraSecreta.toLowerCase();
+      } else {
+        this.establecer_juego(idioma || 'spanish', dificultad || 'easy');
+      }
+    } catch (error) {
+      throw new Error('Error al establecer la palabra secreta: ' + error);
+    }
   }
 
-  async establecer_juego(idioma: string, dificultad: string): Promise<void> {
-    const palabra = await this.nueva_palabra_secreta(idioma, dificultad);
-    this.constructor(palabra);
+  private async establecer_juego(idioma: string, dificultad: string): Promise<void> {
+    this.palabraSecreta = await this.nueva_palabra_secreta(idioma, dificultad);
   }
-  
+
   public adivinar_letra(letra: string): boolean {
     if (!this.verificar_letra_ingresada_repetida(letra)) {
       letra = letra.toLowerCase();
@@ -97,9 +103,12 @@ export class Ahorcado {
     return this.es_victoria_o_es_derrota() !== 'en progreso';
   }
 
-  public async nueva_palabra_secreta(idioma: string = 'spanish', dificultad: string = 'easy'): Promise<string> {
+  public async nueva_palabra_secreta(
+    idioma: string = 'spanish',
+    dificultad: string = 'easy'
+  ): Promise<string> {
     const palabras = await import(`../languages/${idioma}-${dificultad}-words.json`);
     const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
-    return palabraAleatoria;
+    return palabraAleatoria.solution.toLowerCase();
   }
 }

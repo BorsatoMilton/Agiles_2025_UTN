@@ -1,4 +1,3 @@
-{ "words":
 [
   { "id": 1, "solution": "ABRAZO" },
   { "id": 2, "solution": "AGUA" },
@@ -101,4 +100,3 @@
   { "id": 99, "solution": "VASO" },
   { "id": 100, "solution": "LUZ" }
 ]
-}

@@ -1,0 +1,28 @@
+<h4>Seleccionar Idioma</h4>
+<mat-form-field>
+  <mat-label>Idioma</mat-label>
+  <mat-select>
+    @for (idioma of idiomas; track idioma) {
+    <mat-option [value]="idioma">{{ idioma }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<h4>Seleccionar Dificultad</h4>
+<mat-form-field>
+  <mat-label>Dificultad</mat-label>
+  <mat-select>
+    @for (dificultad of dificultades; track dificultad) {
+    <mat-option [value]="dificultad">{{ dificultad }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<section>
+  <div class="example-label">Jugar</div>
+  <div class="example-button-row">
+    <button matButton="filled">Basic</button>
+    <button matButton="filled" disabled>Disabled</button>
+    <a matButton="filled" href="https://www.google.com/" target="_blank">Link</a>
+  </div>
+</section>

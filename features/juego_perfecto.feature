@@ -4,6 +4,6 @@ Feature: El juego perfecto
   para ser un crack
 
   Scenario: Victoria perfecta sin errores
-    Given La palabra MANZANA
+    Given Una palabra cualquiera
     When Adivino todas las letras
     Then Deberia mostrarme que gane
