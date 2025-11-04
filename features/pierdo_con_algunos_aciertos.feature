@@ -4,7 +4,13 @@ Feature: Pierdo con algunos aciertos
   para ver cómo finaliza el juego en derrota
 
   Scenario: Derrota con algunos aciertos
-    Given una palabra cualquiera
-    When Adivino algunas letras correctas y intento letras incorrectas
-    And Supero el limite de intentos
-    Then Deberia mostrarme que perdi
+    Given la palabra UVA
+    When ingreso la letra u
+    and ingreso la letra a
+    and ingreso la letra c
+    and ingreso la letra e
+    and ingreso la letra t
+    and ingreso la letra y
+    and ingreso la letra p
+    and ingreso la letra f
+    Then Deberia mostrarme que perdi
