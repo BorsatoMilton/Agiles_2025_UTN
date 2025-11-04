@@ -31,14 +31,14 @@ describe('Ahorcado - Nuevos tests', () => {
 
   it('Palabra inicial con guiones', () => {
     expect(juego.mostrar_progreso_palabra()).toBe(
-      '-'.repeat(juego.informar_palabra_secreta().length)
+      '_'.repeat(juego.informar_palabra_secreta().length)
     ); //Mostraria "- - - - -"
   });
 
   it('Mostrar progreso de la palabra', () => {
     juego.adivinar_letra('g');
     expect(juego.mostrar_progreso_palabra()).toBe(
-      'g' + '-'.repeat(juego.informar_palabra_secreta().length - 1)
+      'g' + '_'.repeat(juego.informar_palabra_secreta().length - 1)
     );
   });
 
