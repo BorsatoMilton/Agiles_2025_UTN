@@ -1,7 +1,7 @@
 :root {
   --bg: #f6f8fb;
   --card-bg: #ffffff;
-  --primary: #1976d2; /* Material blue 700 */
+  --primary: #1976d2;
   --accent: #00bcd4;
   --warn: #d32f2f;
   --text: #263238;
@@ -25,7 +25,6 @@ body {
   color: var(--text);
 }
 
-/* Contenedor general centrado */
 .ahorcado-container {
   min-height: 100vh;
   display: flex;
@@ -34,7 +33,6 @@ body {
   padding: 28px;
 }
 
-/* Card principal */
 .ahorcado-card {
   width: 100%;
   max-width: 720px;
@@ -49,7 +47,6 @@ body {
   border: 1px solid rgba(20, 26, 32, 0.04);
 }
 
-/* Título */
 .ahorcado-card h1 {
   margin: 0;
   font-size: 1.5rem;
@@ -57,7 +54,6 @@ body {
   font-weight: 600;
 }
 
-/* Area de la palabra secreta */
 .palabra-secreta {
   margin-top: 6px;
   padding: 18px;
@@ -67,7 +63,7 @@ body {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.6rem;
   text-align: center;
-  letter-spacing: 10px; /* espacio entre caracteres para imitar huecos */
+  letter-spacing: 10px;
   color: var(--text);
   user-select: none;
   display: flex;
@@ -76,7 +72,6 @@ body {
   min-height: 72px;
 }
 
-/* Input area (alineacion con Material inputs) */
 .input-area {
   display: flex;
   gap: 12px;
@@ -85,14 +80,12 @@ body {
   flex-wrap: wrap;
 }
 
-/* Ajuste al mat-form-field si querés forzar ancho del input */
 .letra-field {
   width: 120px;
   max-width: 40%;
   min-width: 120px;
 }
 
-/* Si el mat-form-field tiene input interno, forzamos centrado */
 .letra-field input[matInput] {
   text-align: center;
   font-size: 1.2rem;
@@ -100,7 +93,6 @@ body {
   letter-spacing: 2px;
 }
 
-/* Botones - se apoyan en estilos de Angular Material, pero añadimos separación */
 button[mat-raised-button],
 button[mat-stroked-button] {
   min-width: 120px;
@@ -109,7 +101,6 @@ button[mat-stroked-button] {
   font-weight: 600;
 }
 
-/* Info del juego */
 .info-row {
   display: flex;
   gap: 18px;
@@ -129,7 +120,6 @@ button[mat-stroked-button] {
   color: var(--text);
 }
 
-/* Lista de letras usadas */
 .letras-usadas,
 .info-row span {
   display: inline-block;
@@ -138,7 +128,6 @@ button[mat-stroked-button] {
   color: #2b3a42;
 }
 
-/* Reiniciar / Salir */
 .reiniciar {
   display: flex;
   gap: 12px;
@@ -146,13 +135,11 @@ button[mat-stroked-button] {
   margin-top: 6px;
 }
 
-/* Estado de intento crítico */
 .intentos-restantes-bajo {
   color: var(--warn);
   font-weight: 700;
 }
 
-/* Pequeñas ayudas visuales */
 .palabra-secreta::after {
   content: '';
   display: block;
@@ -164,7 +151,6 @@ button[mat-stroked-button] {
   margin-right: auto;
 }
 
-/* Responsividad */
 @media (max-width: 520px) {
   .ahorcado-card {
     padding: 18px;
