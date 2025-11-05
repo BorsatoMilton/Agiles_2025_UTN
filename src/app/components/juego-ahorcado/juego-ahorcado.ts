@@ -5,7 +5,7 @@ import { Ahorcado } from '../../../resources/models/ahorcado';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { DialogReinicio } from '../dialog-reinicio/dialog-reinicio.js';
@@ -18,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -33,7 +34,12 @@ export class JuegoAhorcado implements OnInit {
   dificultad!: string;
   intentosRestantes!: number;
   letrasUtilizadas: string[] = [];
-  letraIngresada: string = '';
+  
+  letraControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z]$'),
+    Validators.maxLength(1)
+  ]);
 
   constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
     this.ngOnInit();
@@ -64,6 +70,18 @@ export class JuegoAhorcado implements OnInit {
     }
     this.intentosRestantes = 6 - this.juego.get_cantidad_intentos_realizados();
     this.palabraMostrada = '_'.repeat(this.juego.informar_palabra_secreta().length);
+    this.actualizarLetrasUtilizadas(); // <- Agregar esta línea
+
+    this.letraControl.valueChanges.subscribe(value => {
+      if (value && value.length > 0) {
+        const letraFiltrada = value.replace(/[^a-zA-Z]/g, '');
+        if (letraFiltrada !== value) {
+          this.letraControl.setValue(letraFiltrada.charAt(0).toUpperCase(), { emitEvent: false });
+        } else if (value.length === 1) {
+          this.letraControl.setValue(value.toUpperCase(), { emitEvent: false });
+        }
+      }
+    });
   }
 
   mostrarProgreso() {
@@ -74,21 +92,37 @@ export class JuegoAhorcado implements OnInit {
     this.letrasUtilizadas = this.juego.informar_letras_utilizadas();
   }
 
-  adivinarLetra(letra: string) {
-    this.juego.adivinar_letra(letra);
-    this.mostrarProgreso();
-    this.mostrar_letras_usadas();
-    this.intentosRestantes = 6 - this.juego.get_cantidad_intentos_realizados();
-    this.letraIngresada = '';
-    if (
-      this.intentosRestantes <= 0 ||
-      this.palabraMostrada === this.juego.informar_palabra_secreta()
-    ) {
-      this.openDialog(DialogReinicio, {
-        resultado: this.juego.es_victoria_o_es_derrota(),
-        palabraSecreta: this.juego.informar_palabra_secreta(),
-      });
+  actualizarLetrasUtilizadas(): void {
+    this.letrasUtilizadas = this.juego.informar_letras_utilizadas();
+  }
+
+
+  adivinarLetra() {
+    if (this.letraControl.valid) {
+      const letra = this.letraControl.value;
+      if (letra) {
+        this.juego.adivinar_letra(letra);
+        this.mostrarProgreso();
+        this.mostrar_letras_usadas();
+        this.intentosRestantes = 6 - this.juego.get_cantidad_intentos_realizados();
+        
+        this.letraControl.reset();
+        
+        if (
+          this.intentosRestantes <= 0 ||
+          this.palabraMostrada === this.juego.informar_palabra_secreta()
+        ) {
+          this.openDialog(DialogReinicio, {
+            resultado: this.juego.es_victoria_o_es_derrota(),
+            palabraSecreta: this.juego.informar_palabra_secreta(),
+          });
+        }
+      }
     }
+  }
+
+  onEnterKey() {
+    this.adivinarLetra();
   }
 
   verificarLetra(letra: string): boolean {
@@ -107,7 +141,7 @@ export class JuegoAhorcado implements OnInit {
       this.mostrarProgreso();
       this.intentosRestantes = 6;
       this.letrasUtilizadas = [];
-      this.letraIngresada = '';
+      this.letraControl.reset();
     }
   }
 }

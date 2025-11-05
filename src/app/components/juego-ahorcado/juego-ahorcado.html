@@ -8,29 +8,33 @@
     </div>
 
     <div class="input-area">
-      <mat-form-field appearance="outline">
-        <mat-label>Ingresa una letra</mat-label>
-        <input
-          type="text"
-          matInput
-          minlength="1"
-          maxlength="1"
-          [(ngModel)]="letraIngresada"
-          (keyup.enter)="adivinarLetra(letraIngresada)"
-          aria-label="Ingresar letra"
-        />
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Ingresa una letra</mat-label>
+          <input
+            type="text"
+            matInput
+            [formControl]="letraControl"
+            (keyup.enter)="onEnterKey()"
+            aria-label="Ingresar letra"
+            maxlength="1"
+          />
+          <mat-error *ngIf="letraControl.hasError('pattern')">
+            Solo se permiten letras (a-z, A-Z)
+          </mat-error>
+          <mat-error *ngIf="letraControl.hasError('required')">
+            La letra es requerida
+          </mat-error>
+        </mat-form-field>
     </div>
 
     <div class="input-area">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="adivinarLetra(letraIngresada)"
-        [disabled]="verificarLetra(letraIngresada)"
-      >
-        Arriesgar
-      </button>
+        <button 
+          mat-raised-button 
+          color="primary" 
+          (click)="adivinarLetra()"
+          [disabled]="!letraControl.valid">
+          Arriesgar
+        </button>
     </div>
     <mat-divider></mat-divider>
     <div class="info-row">
