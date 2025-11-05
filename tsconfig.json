@@ -27,5 +27,5 @@
   "files": [],
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.spec.json" }],
   "types": ["jest", "node"], // agregamos node para ts-node/Cucumber
-  "include": ["src/**/*.ts", "features/**/*.ts", "tests/**/*.ts" ] // importante para Cucumber
+  "include": ["src/**/*.ts", "cypress/e2e/features/**/*.ts", "tests/**/*.ts", "cypress/**/*.ts"] // importante para Cucumber
 }
