@@ -10,7 +10,12 @@
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage",
     "test:verbose": "jest --verbose",
-    "test:e2e": "cross-env TS_NODE_PROJECT=tsconfig.node.json cucumber-js --require-module ts-node/register --require features/step_definitions/*.ts"
+    "test:e2e": "cypress run --spec \"cypress/e2e/features/**/*.feature\"",
+    "test:e2e:open": "cypress open --e2e",
+    "test:e2e:headed": "cypress run --spec \"cypress/e2e/features/**/*.feature\" --headed",
+    "test:e2e:focus": "cypress run --spec \"cypress/e2e/features/**/*.feature\" --env TAGS=\"@focus\"",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
   },
   "prettier": {
     "printWidth": 100,
@@ -43,6 +48,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.3.8",
     "@angular/build": "^20.3.6",
     "@angular/cli": "^20.3.6",
     "@angular/compiler-cli": "^20.3.0",
@@ -61,6 +67,10 @@
     "ts-node": "^10.9.2",
     "typescript": "~5.9.2"
   },
+  "cypress-cucumber-preprocessor": {
+  "nonGlobalStepDefinitions": true,
+  "stepDefinitions": "cypress/e2e/features/**/*.ts"
+},  
   "jest": {
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [

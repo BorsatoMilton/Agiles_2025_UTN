@@ -6,8 +6,6 @@ import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild
 export default defineConfig({
   e2e: {
     specPattern: "cypress/e2e/features/**/*.feature",
-    // @ts-expect-error - Propiedad extendida por el plugin Cucumber
-    stepDefinitions: "cypress/e2e/features/step_definitions/**/*.ts",
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
 

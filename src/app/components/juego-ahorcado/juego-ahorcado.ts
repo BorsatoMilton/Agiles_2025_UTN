@@ -56,7 +56,12 @@ export class JuegoAhorcado implements OnInit {
   async ngOnInit() {
     this.idioma = this.route.snapshot.queryParamMap.get('idioma') || 'spanish';
     this.dificultad = this.route.snapshot.queryParamMap.get('dificultad') || 'easy';
-    this.juego = new Ahorcado(undefined, this.idioma, this.dificultad);
+    const palabraForzada = this.route.snapshot.queryParamMap.get('palabraForzada');
+    if(palabraForzada !== null) {
+      this.juego = new Ahorcado(palabraForzada, undefined, undefined);
+    }else {
+      this.juego = new Ahorcado(undefined, this.idioma, this.dificultad);
+    }
     this.intentosRestantes = 6 - this.juego.get_cantidad_intentos_realizados();
     this.palabraMostrada = '_'.repeat(this.juego.informar_palabra_secreta().length);
   }
