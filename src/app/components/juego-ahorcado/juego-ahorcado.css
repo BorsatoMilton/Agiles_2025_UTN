@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #2e79af, #09153b);
+  background: linear-gradient(135deg, #16121f, #0e2c8d);
   font-family: 'Roboto', Arial, sans-serif;
   text-align: center;
   padding: 20px;
@@ -26,6 +26,9 @@
   max-width: 420px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-color: #989eca;
+  border-width: 3px;
+  border-style: solid;
 }
 
 .ahorcado-card:hover {
@@ -47,7 +50,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Área de inputs */
 .input-area {
   margin-bottom: 16px;
   display: flex;

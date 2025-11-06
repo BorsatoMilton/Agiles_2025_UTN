@@ -4,10 +4,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-selector-dificultad-idioma',
-  imports: [MatFormFieldModule, MatSelectModule, MatButtonModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatSelectModule, MatButtonModule, ReactiveFormsModule,  MatDividerModule],
   templateUrl: './selector-dificultad-idioma.html',
   styleUrl: './selector-dificultad-idioma.css',
 })

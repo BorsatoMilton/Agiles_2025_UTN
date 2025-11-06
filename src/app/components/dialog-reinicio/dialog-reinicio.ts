@@ -7,6 +7,7 @@ import {
   MatDialogContent,
   MatDialogActions,
 } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 
 interface DialogData {
   resultado: string;
@@ -15,7 +16,7 @@ interface DialogData {
 
 @Component({
   selector: 'app-dialog-reinicio',
-  imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions],
+  imports: [MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDividerModule],
   templateUrl: './dialog-reinicio.html',
   styleUrl: './dialog-reinicio.css',
 })
