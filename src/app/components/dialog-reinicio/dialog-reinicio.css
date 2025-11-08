@@ -1,15 +1,14 @@
 :host {
   display: block;
   font-family: 'Roboto', Arial, sans-serif;
-}
-
-.dialog-title {
+  font-size: 16px;
   text-align: center;
-  font-weight: 600;
-  color: #3f51b5;
 }
 
 .dialog-content {
+  width: 100%;
+  max-width: 500px;   
+  box-sizing: border-box;
   padding: 20px;
   text-align: center;
   background: #f3f6fd;
@@ -25,26 +24,27 @@
   margin-bottom: 10px;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .outcome-icon {
-  font-size: 2.5rem;
+  font-size: clamp(1.6rem, 6vw, 2.5rem); 
+  line-height: 1;
 }
 
 .estado {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
   font-weight: bold;
   color: #2c3e50;
 }
 
 .subtexto {
-  font-size: 0.9rem;
+  font-size: clamp(.8rem, 2.2vw, .9rem);
   color: #555;
 }
 
 .palabra-secreta {
-  font-size: 1.1rem;
+  font-size: clamp(.95rem, 2.8vw, 1.1rem);
   font-weight: 600;
   color: #673ab7;
   margin-top: 2px;
@@ -53,29 +53,68 @@
 .pregunta {
   margin-top: 15px;
   font-weight: 500;
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 3.5vw, 1.4rem);
   color: #333;
 }
 
 .dialog-actions {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   padding-bottom: 10px;
 }
 
-.btn-no {
-  background: #f8d7da;
-  color: #721c24;
-  border-radius: 8px;
+.dialog-actions button {
+  flex: 1;                /* hace que ambos botones tengan igual ancho */
+  max-width: 120px;       /* evita que se estiren demasiado en pantallas grandes */
+  text-align: center;
+  box-sizing: border-box; /* evita variaciones de borde/padding */
+  margin: 0;
 }
 
-.btn-si {
-  background: #c8e6c9;
-  color: #256029;
+.btn-no, .btn-si {
+  border: none;
   border-radius: 8px;
+  padding: 10px 0;
+  font-weight: 500;
+  cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.9;
+.btn-no { background: #f8d7da; color: #721c24; }
+.btn-si  { background: #c8e6c9; color: #256029; }
+
+button:hover { opacity: 0.95; }
+
+@media (max-width: 600px) {
+  .dialog-content {
+    padding: 12px;
+    max-width: 92vw;    
+  }
+
+  .resultado-wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 8px;
+  }
+
+  .btn-no, .btn-si {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+}
+
+.responsive-dialog .mat-dialog-container {
+  padding: 12px;
+  max-width: 95vw !important;
+  width: auto !important;
 }
