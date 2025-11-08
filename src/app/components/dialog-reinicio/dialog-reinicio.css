@@ -65,10 +65,10 @@
 }
 
 .dialog-actions button {
-  flex: 1;                /* hace que ambos botones tengan igual ancho */
-  max-width: 120px;       /* evita que se estiren demasiado en pantallas grandes */
+  flex: 1;                
+  max-width: 120px;       
   text-align: center;
-  box-sizing: border-box; /* evita variaciones de borde/padding */
+  box-sizing: border-box; 
   margin: 0;
 }
 
