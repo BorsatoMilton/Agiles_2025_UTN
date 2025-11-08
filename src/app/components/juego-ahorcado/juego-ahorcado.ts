@@ -70,7 +70,7 @@ export class JuegoAhorcado implements OnInit {
     }
     this.intentosRestantes = 6 - this.juego.get_cantidad_intentos_realizados();
     this.palabraMostrada = '_'.repeat(this.juego.informar_palabra_secreta().length);
-    this.actualizarLetrasUtilizadas(); // <- Agregar esta línea
+    this.actualizarLetrasUtilizadas();
 
     this.letraControl.valueChanges.subscribe(value => {
       if (value && value.length > 0) {
@@ -137,7 +137,7 @@ export class JuegoAhorcado implements OnInit {
     if (!confirmation) {
       this.router.navigate([''], {});
     } else {
-      this.juego = new Ahorcado(undefined, this.idioma, this.dificultad);
+      this.juego.reiniciar_juego(confirmation);
       this.mostrarProgreso();
       this.intentosRestantes = 6;
       this.letrasUtilizadas = [];

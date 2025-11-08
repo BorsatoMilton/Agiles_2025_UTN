@@ -11,13 +11,17 @@ export class Ahorcado {
   private letrasErradas: string[] = [];
   private intentosRealizados: number = 0;
   private maxIntentos: number = 6;
+  private idioma: string = "spanish";
+  private dificultad: string = "easy";
 
   constructor(palabraSecreta?: string, idioma?: string, dificultad?: string) {
     try {
       if (palabraSecreta != undefined) {
         this.palabraSecreta = palabraSecreta.toLowerCase();
       } else {
-        this.establecer_juego(idioma || 'spanish', dificultad || 'easy');
+        this.idioma = idioma || 'spanish';
+        this.dificultad = dificultad || 'easy';
+        this.establecer_juego(this.idioma, this.dificultad);
       }
     } catch (error) {
       throw new Error('Error al establecer la palabra secreta: ' + error);
@@ -86,14 +90,14 @@ export class Ahorcado {
     return this.letrasAcertadas;
   }
 
-  public reiniciar_juego(confirmacion: boolean): boolean {
+  public async reiniciar_juego(confirmacion: boolean): Promise<boolean> {
     if (confirmacion) {
       this.letrasIngresadas = [];
       this.letrasAcertadas = [];
       this.letrasErradas = [];
       this.intentosRealizados = 0;
       this.maxIntentos = 6;
-      //this.pedir_nueva_palabra_secreta(); // Se deberia descomentar debido a que pide input por consola, o bien tener un archivo con varios palabras, mas adelante lo implementaremos.
+      this.palabraSecreta = await this.nueva_palabra_secreta(this.idioma, this.dificultad);
       return true;
     }
     return false;
@@ -107,7 +111,7 @@ export class Ahorcado {
     return this.es_victoria_o_es_derrota() !== 'en progreso';
   }
 
-  public async nueva_palabra_secreta(
+  private async nueva_palabra_secreta(
     idioma: string = 'spanish',
     dificultad: string = 'easy'
   ): Promise<string> {
@@ -117,6 +121,6 @@ export class Ahorcado {
 
     const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
 
-    return palabraAleatoria.solution.toLowerCase();
+    return palabraAleatoria.solution.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 }

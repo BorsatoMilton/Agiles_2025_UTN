@@ -14,7 +14,18 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class SelectorDificultadIdioma {
   idiomas = ['spanish', 'english', 'french', 'portuguese'];
+  idiomaLabels: Record<string, string> = {
+  spanish: 'Español',
+  english: 'Inglés',
+  french: 'Francés',
+  portuguese: 'Portugués'
+  };
   dificultades = ['easy', 'medium', 'hard'];
+  dificultadLabels: Record<string, string> = {
+    easy: 'Fácil',
+    medium: 'Medio',
+    hard: 'Difícil'
+  };
   idiomaSeleccionado: string = this.idiomas[0];
   dificultadSeleccionada: string = this.dificultades[0];
   formAhorcado: FormGroup;

@@ -99,8 +99,9 @@ describe('Ahorcado - Reiniciar juego', () => {
   juego.adivinar_letra('a');
   juego.adivinar_letra('s');
 
-  it('Deberia reiniciar el juego', () => {
-    expect(juego.reiniciar_juego(true)).toBe(true);
+  it('Deberia reiniciar el juego', async () => {
+    const resultado = await juego.reiniciar_juego(true);
+    expect(resultado).toBe(true);
   });
 });
 
@@ -110,8 +111,9 @@ describe('Ahorcado - No Reiniciar juego', () => {
   juego.adivinar_letra('a');
   juego.adivinar_letra('s');
 
-  it('No deberia reiniciar el juego', () => {
-    expect(juego.reiniciar_juego(false)).toBe(false);
+  it('No deberia reiniciar el juego', async () => {
+    const resultado = await juego.reiniciar_juego(false);
+    expect(resultado).toBe(false);
   });
 });
 

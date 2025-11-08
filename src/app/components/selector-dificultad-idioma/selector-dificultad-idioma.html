@@ -7,9 +7,9 @@
       <mat-form-field appearance="fill">
         <mat-label>Idioma</mat-label>
         <mat-select formControlName="idioma">
-          @for (idioma of idiomas; track idioma) {
-          <mat-option [value]="idioma">{{ idioma.toUpperCase() }}</mat-option>
-          }
+        @for (idioma of idiomas; track idioma) {
+          <mat-option [value]="idioma">{{ idiomaLabels[idioma].toUpperCase() }}</mat-option>
+        }
         </mat-select>
       </mat-form-field>
       <mat-divider></mat-divider>
@@ -18,7 +18,7 @@
         <mat-label>Dificultad</mat-label>
         <mat-select formControlName="dificultad">
           @for (dificultad of dificultades; track dificultad) {
-          <mat-option [value]="dificultad">{{ dificultad.toUpperCase() }}</mat-option>
+          <mat-option [value]="dificultad">{{ dificultadLabels[dificultad].toUpperCase() }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

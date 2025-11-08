@@ -4,9 +4,9 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 Given('la palabra "MANZANA" con aciertos', () => {
   cy.visit('https://ahorcadoagiles.vercel.app/');
   cy.get('mat-select[formControlName="idioma"]').click();
-  cy.get('mat-option').contains('SPANISH').click();
+  cy.get('mat-option').contains('ESPAÑOL').click();
   cy.get('mat-select[formControlName="dificultad"]').click();
-  cy.get('mat-option').contains('EASY').click();
+  cy.get('mat-option').contains('FÁCIL').click();
   cy.get('button').contains('Jugar').click();
   cy.url().should('include', '/juego');
   cy.visit('https://ahorcadoagiles.vercel.app/juego?idioma=spanish&dificultad=easy&palabraForzada=MANZANA');
