@@ -23,7 +23,7 @@ When('ingreso la letra {string} en juego perfecto', (letra: string) => {
 Then('Deberia mostrarme que gane perfectamente', () => {
   cy.get('.cdk-overlay-container', { timeout: 10000 }).should('exist');
   cy.get('.cdk-overlay-container [mat-dialog-title]', { timeout: 10000 })
-    .should('contain.text', 'Juego finalizado');
+    .should('contain.text', '¡ Juego Finalizado !');
   cy.get('.cdk-overlay-container .estado').should('contain.text', 'VICTORIA');
   cy.get('.cdk-overlay-container .palabra-secreta').should('contain.text', 'MANZANA');
 });

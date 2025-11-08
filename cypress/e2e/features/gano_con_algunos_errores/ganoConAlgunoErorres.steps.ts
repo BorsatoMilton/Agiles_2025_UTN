@@ -34,7 +34,7 @@ Then('deberia tener {int} intentos restantes en victoria', (intentosEsperados: n
 Then('Deberia mostrarme que gane con errores', () => {
   cy.get('.cdk-overlay-container', { timeout: 10000 }).should('exist');
   cy.get('.cdk-overlay-container [mat-dialog-title]', { timeout: 10000 })
-    .should('contain.text', 'Juego finalizado');
+    .should('contain.text', '¡ Juego Finalizado !');
   cy.get('.cdk-overlay-container .estado').should('contain.text', 'VICTORIA');
   cy.get('.cdk-overlay-container .palabra-secreta').should('contain.text', 'LIMON');
 });

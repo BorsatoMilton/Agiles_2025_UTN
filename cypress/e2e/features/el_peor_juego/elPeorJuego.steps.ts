@@ -23,7 +23,7 @@ When('ingreso la letra {string} en el peor juego', (letra: string) => {
 Then('Deberia mostrarme que perdi en el peor juego', () => {
   cy.get('.cdk-overlay-container', { timeout: 10000 }).should('exist');
   cy.get('.cdk-overlay-container [mat-dialog-title]', { timeout: 10000 })
-    .should('contain.text', 'Juego finalizado');
+    .should('contain.text', '¡ Juego Finalizado !');
   cy.get('.cdk-overlay-container .estado').should('contain.text', 'DERROTA');
   cy.get('.cdk-overlay-container .palabra-secreta').should('contain.text', 'MANZANA');
 });
