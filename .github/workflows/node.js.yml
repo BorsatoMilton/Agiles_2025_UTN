@@ -31,16 +31,16 @@ jobs:
         run: npm run build --if-present
 
       - name: Run Jest unit tests
-        run: npm test -- --coverage
+        run: npm run test:coverage
 
-      - name: Start Angular app in background
+      - name: Start Angular app with coverage in background
         run: |
-          npm run start &>/dev/null &
+          npm run start:coverage &>/dev/null &
           echo "Esperando que levante Angular..."
           npx wait-on http://localhost:4200
 
-      - name: Run Cypress Cucumber E2E tests
-        run: npm run test:e2e
+      - name: Run Cypress Cucumber E2E tests with coverage
+        run: npm run test:e2e:ci
 
       - name: Upload coverage report (optional)
         if: success()
