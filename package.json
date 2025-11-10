@@ -19,7 +19,8 @@
     "cy:open": "cypress open",
     "coverage:report": "nyc report --reporter=html",
     "cypress:coverage": "start cmd /k \"npm run start:coverage\" & npx wait-on http://localhost:4200 && npx cypress run && npm run coverage:report",
-    "test:e2e:ci": "npm run start:coverage & npx wait-on http://localhost:4200 && npx cypress run --spec \"cypress/e2e/features/**/*.feature\" && npm run coverage:report"
+    "test:e2e:ci": "npx wait-on http://localhost:4200 && npx cypress run --spec \"cypress/e2e/features/**/*.feature\" && npm run coverage:report"
+    
   },
   "prettier": {
     "printWidth": 100,
