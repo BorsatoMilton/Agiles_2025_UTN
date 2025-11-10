@@ -4,11 +4,12 @@ import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-prepro
 import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
 
 export default defineConfig({
+  projectId: "2bua6s",
   e2e: {
     specPattern: "cypress/e2e/features/**/*.feature",
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
-
+      require('@cypress/code-coverage/task')(on, config);
       on(
         "file:preprocessor",
         createBundler({

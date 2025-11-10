@@ -14,8 +14,12 @@
     "test:e2e:open": "cypress open --e2e",
     "test:e2e:headed": "cypress run --spec \"cypress/e2e/features/**/*.feature\" --headed",
     "test:e2e:focus": "cypress run --spec \"cypress/e2e/features/**/*.feature\" --env TAGS=\"@focus\"",
+    "start:coverage": "ng serve --extra-webpack-config webpack.coverage.js",
     "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "coverage:report": "nyc report --reporter=html",
+    "cypress:coverage": "start cmd /k \"npm run start:coverage\" & npx wait-on http://localhost:4200 && npx cypress run && npm run coverage:report"
+
   },
   "prettier": {
     "printWidth": 100,
@@ -55,22 +59,26 @@
     "@badeball/cypress-cucumber-preprocessor": "^23.2.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.7",
     "@cucumber/cucumber": "^12.2.0",
+    "@cypress/code-coverage": "^3.14.7",
     "@types/express": "^5.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.19.23",
+    "coverage-istanbul-loader": "^3.0.5",
     "cross-env": "^10.1.0",
     "cypress": "^15.6.0",
     "esbuild": "^0.25.12",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
     "jest-preset-angular": "^15.0.3",
+    "ngx-build-plus": "^20.0.0",
+    "nyc": "^17.1.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.2"
   },
   "cypress-cucumber-preprocessor": {
-  "nonGlobalStepDefinitions": true,
-  "stepDefinitions": "cypress/e2e/features/**/*.ts"
-},  
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "cypress/e2e/features/**/*.ts"
+  },
   "jest": {
     "preset": "jest-preset-angular",
     "setupFilesAfterEnv": [

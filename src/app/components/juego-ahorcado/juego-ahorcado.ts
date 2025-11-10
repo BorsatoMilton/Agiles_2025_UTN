@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { DialogReinicio } from '../dialog-reinicio/dialog-reinicio.js';
+import { DialogReinicio } from '../dialog-reinicio/dialog-reinicio';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/portal';
 import { MatDividerModule } from '@angular/material/divider';
