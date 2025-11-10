@@ -125,14 +125,6 @@ export class JuegoAhorcado implements OnInit {
     this.adivinarLetra();
   }
 
-  verificarLetra(letra: string): boolean {
-    let decision = false;
-    if (letra.length !== 1 || this.juego.verificar_letra_ingresada_repetida(letra)) {
-      decision = true;
-    }
-    return decision;
-  }
-
   reiniciarJuego(confirmation: boolean) {
     if (!confirmation) {
       this.router.navigate([''], {});

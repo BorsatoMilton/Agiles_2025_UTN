@@ -20,10 +20,11 @@ When('ingreso la letra {string} en el peor juego', (letra: string) => {
   cy.wait(300);
 });
 
-Then('Deberia mostrarme que perdi en el peor juego', () => {
+Then('Deberia mostrarme que perdi y volver al menú', () => {
   cy.get('.cdk-overlay-container', { timeout: 10000 }).should('exist');
   cy.get('.cdk-overlay-container [mat-dialog-title]', { timeout: 10000 })
     .should('contain.text', '¡ Juego Finalizado !');
   cy.get('.cdk-overlay-container .estado').should('contain.text', 'DERROTA');
   cy.get('.cdk-overlay-container .palabra-secreta').should('contain.text', 'MANZANA');
+  cy.get('button').contains('No').click();
 });

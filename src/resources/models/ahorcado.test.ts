@@ -138,3 +138,16 @@ describe('Ahorcado - Mostrar letras acertadas', () => {
     expect(juego.no_permitir_ingresar_letras_si_el_juego_finalizo()).toBe(true);
   });
 });
+
+describe('Iniciar juego con idioma y dificultad establecidos', () => {
+  let juego: Ahorcado;
+
+  beforeEach(() => {
+    juego = new Ahorcado(undefined, 'spanish', 'easy');
+  });
+
+  it('Debería iniciar el juego con idioma español y dificultad fácil', () => {
+    expect((juego as any).idioma).toBe('spanish');
+    expect((juego as any).dificultad).toBe('easy');
+  });
+});

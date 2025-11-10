@@ -12,4 +12,4 @@ Feature: El peor juego
     And ingreso la letra "W" en el peor juego
     And ingreso la letra "F" en el peor juego
     And ingreso la letra "Q" en el peor juego
-    Then Deberia mostrarme que perdi en el peor juego
+    Then Deberia mostrarme que perdi y volver al menú

@@ -13,4 +13,4 @@ Feature: Pierdo con algunos aciertos
     And ingreso la letra "Y" con aciertos
     And ingreso la letra "P" con aciertos
     And ingreso la letra "F" con aciertos
-    Then Deberia mostrarme que perdi con aciertos
+    Then Deberia mostrarme que perdi con aciertos y volver al menú

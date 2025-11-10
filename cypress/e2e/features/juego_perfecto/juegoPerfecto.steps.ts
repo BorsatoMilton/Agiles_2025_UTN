@@ -20,10 +20,12 @@ When('ingreso la letra {string} en juego perfecto', (letra: string) => {
   cy.wait(300);
 });
 
-Then('Deberia mostrarme que gane perfectamente', () => {
+Then('Deberia mostrarme que gane perfectamente, reiniciar y luego salir', () => {
   cy.get('.cdk-overlay-container', { timeout: 10000 }).should('exist');
   cy.get('.cdk-overlay-container [mat-dialog-title]', { timeout: 10000 })
     .should('contain.text', '¡ Juego Finalizado !');
   cy.get('.cdk-overlay-container .estado').should('contain.text', 'VICTORIA');
   cy.get('.cdk-overlay-container .palabra-secreta').should('contain.text', 'MANZANA');
+  cy.get('button').contains('Sí').click();
+  cy.get('button').contains('Salir').click();
 });

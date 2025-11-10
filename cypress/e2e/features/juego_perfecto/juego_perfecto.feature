@@ -9,4 +9,4 @@ Feature: El juego perfecto
     And ingreso la letra "A" en juego perfecto
     And ingreso la letra "N" en juego perfecto
     And ingreso la letra "Z" en juego perfecto
-    Then Deberia mostrarme que gane perfectamente
+    Then Deberia mostrarme que gane perfectamente, reiniciar y luego salir

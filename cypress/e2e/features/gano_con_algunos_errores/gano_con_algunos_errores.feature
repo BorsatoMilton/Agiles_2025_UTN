@@ -13,4 +13,4 @@ Feature: Gano con algunos errores
     And ingreso la letra "M" con errores
     And ingreso la letra "O" con errores
     And ingreso la letra "N" con errores
-    Then Deberia mostrarme que gane con errores
+    Then Deberia mostrarme que gane con errores y reiniciar el juego
