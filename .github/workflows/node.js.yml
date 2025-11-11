@@ -40,7 +40,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: jest-coverage
+          name: jest-coverage-backend
           path: coverage/
 
       - name: Start Angular app with coverage in background
@@ -56,5 +56,5 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: total-coverage
+          name: cypress-coverage-ui-frontend
           path: coverage/
