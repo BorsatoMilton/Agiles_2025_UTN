@@ -21,8 +21,8 @@ interface DialogData {
   styleUrl: './dialog-reinicio.css',
 })
 export class DialogReinicio implements OnInit {
-  resultado: string = '';
-  palabraSecreta: string = '';
+  resultado = '';
+  palabraSecreta = '';
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
     public dialogRef: MatDialogRef<DialogReinicio>

@@ -1,18 +1,18 @@
-// @ts-ignore: allow importing JSON without enabling "resolveJsonModule" in tsconfig
+
 interface Palabra {
   id: number;
   solution: string;
 }
 
 export class Ahorcado {
-  private palabraSecreta: string = '';
-  private letrasIngresadas: string[] = [];
-  private letrasAcertadas: string[] = [];
-  private letrasErradas: string[] = [];
-  private intentosRealizados: number = 0;
-  private maxIntentos: number = 6;
-  private idioma: string = "spanish";
-  private dificultad: string = "easy";
+  private palabraSecreta = '';
+  private letrasIngresadas = [] as string[];
+  private letrasAcertadas = [] as string[];
+  private letrasErradas = [] as string[];
+  private intentosRealizados = 0;
+  private maxIntentos = 6;
+  private idioma = "spanish";
+  private dificultad = "easy";
 
   constructor(palabraSecreta?: string, idioma?: string, dificultad?: string) {
     try {
@@ -112,8 +112,8 @@ export class Ahorcado {
   }
 
   private async nueva_palabra_secreta(
-    idioma: string = 'spanish',
-    dificultad: string = 'easy'
+    idioma = 'spanish',
+    dificultad = 'easy'
   ): Promise<string> {
     const { default: lista } = await import(`../languages/${idioma}-${dificultad}-words.json`);
 

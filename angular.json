@@ -10,51 +10,51 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-      "build": {
-        "builder": "ngx-build-plus:browser",
-        "options": {
-          "outputPath": "dist/ahorcado",
-          "index": "src/index.html",
-          "main": "src/main.ts",
-          "polyfills": [
-            "zone.js"
-          ],
-          "tsConfig": "tsconfig.app.json",
-          "assets": [
-            {
-              "glob": "**/*",
-              "input": "public"
-            }
-          ],
-          "styles": [
-            "src/custom-theme.scss",
-            "src/styles.css"
-          ]
-        },
-        "configurations": {
-          "production": {
-            "budgets": [
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/ahorcado",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
               {
-                "type": "initial",
-                "maximumWarning": "500kB",
-                "maximumError": "1MB"
-              },
-              {
-                "type": "anyComponentStyle",
-                "maximumWarning": "4kB",
-                "maximumError": "8kB"
+                "glob": "**/*",
+                "input": "public"
               }
             ],
-            "outputHashing": "all"
+            "styles": [
+              "src/custom-theme.scss",
+              "src/styles.css"
+            ]
           },
-          "development": {
-            "optimization": false,
-            "extractLicenses": false,
-            "sourceMap": true
-          }
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
         },
-        "defaultConfiguration": "production"
-      },
         "serve": {
           "builder": "ngx-build-plus:dev-server",
           "configurations": {
@@ -88,11 +88,23 @@
               "src/styles.css"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

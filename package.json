@@ -19,8 +19,8 @@
     "cy:open": "cypress open",
     "coverage:report": "nyc report --reporter=html",
     "cypress:coverage": "start cmd /k \"npm run start:coverage\" & npx wait-on http://localhost:4200 && npx cypress run && npm run coverage:report",
-    "test:e2e:ci": "npx wait-on http://localhost:4200 && npx cypress run --spec \"cypress/e2e/features/**/*.feature\" && npm run coverage:report"
-    
+    "test:e2e:ci": "npx wait-on http://localhost:4200 && npx cypress run --spec \"cypress/e2e/features/**/*.feature\" && npm run coverage:report",
+    "lint": "ng lint"
   },
   "prettier": {
     "printWidth": 100,
@@ -64,17 +64,20 @@
     "@types/express": "^5.0.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.19.23",
+    "angular-eslint": "20.6.0",
     "coverage-istanbul-loader": "^3.0.5",
     "cross-env": "^10.1.0",
     "cypress": "^15.6.0",
     "esbuild": "^0.25.12",
+    "eslint": "^9.39.0",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
     "jest-preset-angular": "^15.0.3",
     "ngx-build-plus": "^20.0.0",
     "nyc": "^17.1.0",
     "ts-node": "^10.9.2",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.46.3"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,

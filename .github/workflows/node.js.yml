@@ -27,11 +27,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run ESLint
+        run: npm run lint
+
       - name: Build Angular app
         run: npm run build --if-present
 
-      - name: Run Jest unit tests
+      - name: Run Jest unit tests (with coverage)
         run: npm run test:coverage
+
+      - name: Upload Jest coverage report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jest-coverage
+          path: coverage/
 
       - name: Start Angular app with coverage in background
         run: |
@@ -42,9 +52,9 @@ jobs:
       - name: Run Cypress Cucumber E2E tests with coverage
         run: npm run test:e2e:ci
 
-      - name: Upload coverage report (optional)
+      - name: Upload total coverage report (optional)
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
+          name: total-coverage
           path: coverage/

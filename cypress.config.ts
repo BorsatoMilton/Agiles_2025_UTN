@@ -9,7 +9,7 @@ export default defineConfig({
     specPattern: "cypress/e2e/features/**/*.feature",
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
-      require('@cypress/code-coverage/task')(on, config);
+      (await import('@cypress/code-coverage/task')).default(on, config);
       on(
         "file:preprocessor",
         createBundler({

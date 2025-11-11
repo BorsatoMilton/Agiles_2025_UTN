@@ -1,7 +1,14 @@
 import { Ahorcado } from './ahorcado';
 
+interface JuegoPrivado {
+  idioma: string;
+  dificultad: string;
+}
+
+
+
 describe('Ahorcado', () => {
-  let juego = new Ahorcado('perro');
+  const juego = new Ahorcado('perro');
   it('debería informar la palabra secreta correctamente', () => {
     expect(juego.informar_palabra_secreta()).toBe('perro');
   });
@@ -23,7 +30,7 @@ describe('Ahorcado', () => {
 //Necesito una instancia nueva para no interferir con los otros tests
 
 describe('Ahorcado - Nuevos tests', () => {
-  let juego = new Ahorcado('gato');
+  const juego = new Ahorcado('gato');
 
   it('Iniciar contador nulo', () => {
     expect(juego.get_cantidad_intentos_realizados()).toBe(0);
@@ -60,7 +67,7 @@ describe('Ahorcado - Nuevos tests', () => {
 });
 
 describe('Ahorcado - Test de derrota', () => {
-  let juego = new Ahorcado('sol');
+  const juego = new Ahorcado('sol');
 
   it('Deberia informar que el usuario perdio', () => {
     juego.adivinar_letra('x');
@@ -74,7 +81,7 @@ describe('Ahorcado - Test de derrota', () => {
 });
 
 describe('Ahorcado - Test en progreso', () => {
-  let juego = new Ahorcado('luna');
+  const juego = new Ahorcado('luna');
 
   it('Deberia informar que el juego esta en progreso', () => {
     juego.adivinar_letra('l');
@@ -94,7 +101,7 @@ describe('Ahorcado - Test en progreso', () => {
 // Reiniciar juego, hago una instancia completa con el juego ganado
 
 describe('Ahorcado - Reiniciar juego', () => {
-  let juego = new Ahorcado('casa');
+  const juego = new Ahorcado('casa');
   juego.adivinar_letra('c');
   juego.adivinar_letra('a');
   juego.adivinar_letra('s');
@@ -106,7 +113,7 @@ describe('Ahorcado - Reiniciar juego', () => {
 });
 
 describe('Ahorcado - No Reiniciar juego', () => {
-  let juego = new Ahorcado('casa');
+  const juego = new Ahorcado('casa');
   juego.adivinar_letra('c');
   juego.adivinar_letra('a');
   juego.adivinar_letra('s');
@@ -118,7 +125,7 @@ describe('Ahorcado - No Reiniciar juego', () => {
 });
 
 describe('Ahorcado - Mostrar letras acertadas', () => {
-  let juego = new Ahorcado('barco');
+  const juego = new Ahorcado('barco');
   juego.adivinar_letra('b');
   juego.adivinar_letra('a');
   juego.adivinar_letra('x'); // Letra errada
@@ -147,7 +154,8 @@ describe('Iniciar juego con idioma y dificultad establecidos', () => {
   });
 
   it('Debería iniciar el juego con idioma español y dificultad fácil', () => {
-    expect((juego as any).idioma).toBe('spanish');
-    expect((juego as any).dificultad).toBe('easy');
+    const juegoPrivado = juego as unknown as JuegoPrivado;
+    expect(juegoPrivado.idioma).toBe('spanish');
+    expect(juegoPrivado.dificultad).toBe('easy');
   });
 });
