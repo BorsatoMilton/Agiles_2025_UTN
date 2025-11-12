@@ -37,7 +37,7 @@ export class JuegoAhorcado implements OnInit {
   
   letraControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z]$'),
+    Validators.pattern('^[a-zA-ZñÑ]$'),
     Validators.maxLength(1)
   ]);
 
@@ -74,7 +74,7 @@ export class JuegoAhorcado implements OnInit {
 
     this.letraControl.valueChanges.subscribe(value => {
       if (value && value.length > 0) {
-        const letraFiltrada = value.replace(/[^a-zA-Z]/g, '');
+        const letraFiltrada = value.replace(/[^a-zA-ZñÑ]/g, '');
         if (letraFiltrada !== value) {
           this.letraControl.setValue(letraFiltrada.charAt(0).toUpperCase(), { emitEvent: false });
         } else if (value.length === 1) {
