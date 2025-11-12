@@ -1,6 +1,7 @@
 # Ahorcado
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+To quality, please check [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tu-org_tu-repo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tu-org_tu-repo)
 
 ## Development server
 
