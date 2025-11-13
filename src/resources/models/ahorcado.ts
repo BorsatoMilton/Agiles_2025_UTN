@@ -15,18 +15,25 @@ export class Ahorcado {
   private dificultad = "easy";
 
   constructor(palabraSecreta?: string, idioma?: string, dificultad?: string) {
-    try {
+  
       if (palabraSecreta != undefined) {
         this.palabraSecreta = palabraSecreta.toLowerCase();
       } else {
         this.idioma = idioma || 'spanish';
         this.dificultad = dificultad || 'easy';
-        this.establecer_juego(this.idioma, this.dificultad);
+      }
+  }
+
+  async inicializar(): Promise<void> {
+    try {
+      if (!this.palabraSecreta) {
+        await this.establecer_juego(this.idioma, this.dificultad);
       }
     } catch (error) {
       throw new Error('Error al establecer la palabra secreta: ' + error);
     }
   }
+
 
   private async establecer_juego(idioma: string, dificultad: string): Promise<void> {
     this.palabraSecreta = await this.nueva_palabra_secreta(idioma, dificultad);
@@ -121,6 +128,6 @@ export class Ahorcado {
 
     const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
 
-    return palabraAleatoria.solution.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return palabraAleatoria.solution.normalize("NFD").replaceAll(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 }

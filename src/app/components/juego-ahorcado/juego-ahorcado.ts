@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { Ahorcado } from '../../../resources/models/ahorcado';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
@@ -41,8 +39,7 @@ export class JuegoAhorcado implements OnInit {
     Validators.maxLength(1)
   ]);
 
-  constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
-    this.ngOnInit();
+  constructor(private readonly route: ActivatedRoute, private readonly router: Router, private readonly dialog: MatDialog) {
   }
 
   openDialog(dialog: ComponentType<unknown>, data: object): void {
@@ -59,7 +56,7 @@ export class JuegoAhorcado implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  ngOnInit() : void {
     this.idioma = this.route.snapshot.queryParamMap.get('idioma') || 'spanish';
     this.dificultad = this.route.snapshot.queryParamMap.get('dificultad') || 'easy';
     const palabraForzada = this.route.snapshot.queryParamMap.get('palabraForzada');
@@ -67,6 +64,7 @@ export class JuegoAhorcado implements OnInit {
       this.juego = new Ahorcado(palabraForzada, undefined, undefined);
     }else {
       this.juego = new Ahorcado(undefined, this.idioma, this.dificultad);
+      this.juego.inicializar();
     }
     this.intentosRestantes = 6 - this.juego.get_cantidad_intentos_realizados();
     this.palabraMostrada = '_'.repeat(this.juego.informar_palabra_secreta().length);
@@ -74,7 +72,7 @@ export class JuegoAhorcado implements OnInit {
 
     this.letraControl.valueChanges.subscribe(value => {
       if (value && value.length > 0) {
-        const letraFiltrada = value.replace(/[^a-zA-ZñÑ]/g, '');
+        const letraFiltrada = value.replaceAll(/[^a-zA-ZñÑ]/g, '');
         if (letraFiltrada !== value) {
           this.letraControl.setValue(letraFiltrada.charAt(0).toUpperCase(), { emitEvent: false });
         } else if (value.length === 1) {

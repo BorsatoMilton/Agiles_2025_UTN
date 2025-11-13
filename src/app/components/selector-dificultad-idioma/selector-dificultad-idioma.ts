@@ -30,7 +30,7 @@ export class SelectorDificultadIdioma {
   dificultadSeleccionada: string = this.dificultades[0];
   formAhorcado: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private readonly router: Router) {
     this.formAhorcado = new FormGroup({
       idioma: new FormControl(this.idiomaSeleccionado),
       dificultad: new FormControl(this.dificultadSeleccionada),

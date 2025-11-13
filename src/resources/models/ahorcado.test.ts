@@ -149,8 +149,9 @@ describe('Ahorcado - Mostrar letras acertadas', () => {
 describe('Iniciar juego con idioma y dificultad establecidos', () => {
   let juego: Ahorcado;
 
-  beforeEach(() => {
+  beforeEach(async() => {
     juego = new Ahorcado(undefined, 'spanish', 'easy');
+    juego.inicializar();
   });
 
   it('Debería iniciar el juego con idioma español y dificultad fácil', () => {
