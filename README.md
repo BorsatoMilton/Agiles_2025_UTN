@@ -1,60 +1,152 @@
-# Ahorcado
+# Ahorcado – Proyecto Angular con TDD, ATDD, Jest, ESLint, CodeQL y SonarCloud
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
-To quality, please check [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tu-org_tu-repo&metric=alert_status)]([https://sonarcloud.io/summary/new_code?id=tu-org_tu-repo](https://sonarcloud.io/summary/overall?id=BorsatoMilton_Agiles_2025_UTN&branch=main))
+Este proyecto implementa el clásico juego del **Ahorcado** utilizando **Angular**, con un enfoque completo en **Prácticas Ágiles**, **TDD**, **ATDD**, **CI/CD**, análisis estático con **SonarCloud**, seguridad con **CodeQL** y pruebas end‑to‑end con **Cypress**.
 
-## Development server
+---
 
-To start a local development server, run:
+##  Tecnologías principales
 
-```bash
-ng serve
+* **Angular**
+* **TypeScript**
+* **Jest** para pruebas unitarias (TDD)
+* **Cypress** para pruebas end‑to‑end (ATDD)
+* **ESLint** para análisis de estilo y reglas
+* **CodeQL** para análisis de seguridad
+* **SonarCloud** para análisis de calidad y cobertura
+* **GitHub Actions** para CI/CD
+* **Vercel** para deploy automático
+
+---
+
+## Estructura del proyecto
+
+```
+src/
+ ├── app/
+ │   ├── components/
+ ├── resources/
+     └── languages/ # Archivos JSON con palabras por idioma y dificultad
+     └── models/  # Clase Ahorcado
+
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Estrategia de Testing
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### TDD – Pruebas unitarias (Jest)
 
-```bash
-ng generate component component-name
-```
+* Se asegura que cada método esté cubierto.
+* Las pruebas incluyen:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+  * Selección de palabra aleatoria
+  * Normalización y validación de letras
+  * Control de intentos
+  * Estados del juego (win/lose)
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Ejecutar:
 
 ```bash
-ng build
+npm run test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### ATDD – Pruebas end‑to‑end (Cypress)
 
-## Running unit tests
+* Validación del flujo completo tal como lo usaría un usuario.
+* Verifica:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+  * Inicio del juego
+  * Interacción con la interfaz
+  * Actualización de errores e interfaz
+  * Fin de partida
+
+Ejecutar:
 
 ```bash
-ng test
+npm run cy:open
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Calidad del código – SonarCloud y CodeQL
+
+El repositorio está integrado con **SonarCloud** y **CodeQL** mediante GitHub Actions.
+
+### Incluye métricas como:
+
+* Cobertura de tests (unitarios) # Con cypress no es compatible a priori, se dificulto la configuración, pero se tiene el coverage de cypress mismo
+* Code smells
+* Duplicaciones
+* Seguridad y vulnerabilidades (CodeQL)
+
+---
+## CI/CD con GitHub Actions + Vercel
+
+### Pipeline incluye:
+
+* Instalación de dependencias
+* ESLint
+* Tests unitarios (Jest)
+* Tests E2E (Cypress)
+* Análisis SonarCloud y CodeQL
+* Deploy **Bloqueo de deploy si los Actions fallan**
+
+El deploy a Vercel solo ocurre si:
+
+* Los tests pasan
+* El análisis de SonarCloud y CodeQL no falla
+
+---
+
+## Archivos JSON dinámicos
+
+Las palabras del ahorcado se cargan dinámicamente:
+
+```ts
+const { default: lista } = await import(`../languages/${idioma}-${dificultad}-words.json`);
+```
+
+Permite agregar nuevos idiomas/dificultades sin modificar el código.
+
+---
+
+## Ejecución del proyecto
+
+Desarrollo:
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Build producción:
 
-## Additional Resources
+```bash
+npm run build
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## Funcionalidades del juego
+
+* Elección aleatoria de palabras
+* Soporte multi‑idioma y multi‑dificultad
+* Control visual de errores
+* Validación del input (incluye Ñ)
+* Mensajes de victoria y derrota
+* Reinicio del juego
+
+---
+
+## Cobertura
+
+Incluye cobertura tanto de **unit tests (Jest)** como de **Cypress**.
+Se genera un único `lcov.info` mergeado. O bien en cada Actions correspondiente se crea su .rar con su coverage (Dentro del .rar --> index.html para visualización)
+
+Visualizar reporte:
+
+```bash
+npm run test:coverage      # Pruebas unitarias
+npm run cypress:coverage   # Pruebas e2e
+```
+
+
