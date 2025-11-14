@@ -1,0 +1,149 @@
+name: Pipeline Completo - CI + Sonar + Deploy
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    # ---------------------------------------------------------
+    # 1) Lint
+    # ---------------------------------------------------------
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run ESLint
+              run: npm run lint
+
+    # ---------------------------------------------------------
+    # 2) Build (solo si lint pasa)
+    # ---------------------------------------------------------
+    build:
+        needs: lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build Angular app
+              run: npm run build
+
+    # ---------------------------------------------------------
+    # 3) Test unitarios (solo si build pasa)
+    # ---------------------------------------------------------
+    jest:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run Jest unit tests
+              run: npm run test:coverage
+
+            - name: Upload Jest coverage report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: jest-coverage
+                  path: coverage/
+
+    # ---------------------------------------------------------
+    # 4) Cypress E2E (solo si jest pasa)
+    # ---------------------------------------------------------
+    cypress:
+        needs: jest
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Start Angular for Cypress
+              run: |
+                  npm run start:coverage &>/dev/null &
+                  npx wait-on http://localhost:4200
+
+            - name: Run Cypress E2E tests
+              run: npm run test:e2e:ci
+
+            - name: Upload Cypress artifacts (optional)
+              uses: actions/upload-artifact@v4
+              with:
+                  name: cypress-artifacts
+                  path: coverage/
+
+    # ---------------------------------------------------------
+    # 5) SonarCloud (solo si cypress pasa)
+    # ---------------------------------------------------------
+    sonar:
+        needs: cypress
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 18
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run tests with coverage (Sonar requiere cobertura)
+              run: npm run test:coverage --if-present
+
+            - name: SonarCloud Scan
+              uses: SonarSource/sonarcloud-github-action@v2
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              with:
+                  args: >
+                      -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+    # ---------------------------------------------------------
+    # 6) Deploy Vercel (solo si TODO lo anterior pasó)
+    # ---------------------------------------------------------
+    deploy:
+        needs: [lint, build, jest, cypress, sonar]
+        runs-on: ubuntu-latest
+        if: success()
+        environment: Production
+
+        steps:
+            - name: Trigger Vercel Deploy Webhook
+              run: |
+                  echo "Everything OK → Deploying to Vercel..."
+                  curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
