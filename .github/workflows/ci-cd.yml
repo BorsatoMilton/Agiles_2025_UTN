@@ -6,12 +6,18 @@ on:
     pull_request:
         branches: ["main"]
 
+permissions:
+    contents: read
+    actions: read
+
 jobs:
     # ---------------------------------------------------------
     # 1) Lint
     # ---------------------------------------------------------
     lint:
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4
 
@@ -27,11 +33,13 @@ jobs:
               run: npm run lint
 
     # ---------------------------------------------------------
-    # 2) Build (solo si lint pasa)
+    # 2) Build
     # ---------------------------------------------------------
     build:
         needs: lint
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4
 
@@ -47,11 +55,13 @@ jobs:
               run: npm run build
 
     # ---------------------------------------------------------
-    # 3) Test unitarios (solo si build pasa)
+    # 3) Test unitarios
     # ---------------------------------------------------------
     jest:
         needs: build
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4
 
@@ -73,11 +83,13 @@ jobs:
                   path: coverage/
 
     # ---------------------------------------------------------
-    # 4) Cypress E2E (solo si jest pasa)
+    # 4) Cypress E2E
     # ---------------------------------------------------------
     cypress:
         needs: jest
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4
 
@@ -104,12 +116,13 @@ jobs:
                   path: coverage/
 
     # ---------------------------------------------------------
-    # 5) SonarCloud (solo si cypress pasa)
+    # 5) SonarCloud
     # ---------------------------------------------------------
     sonar:
         needs: cypress
         runs-on: ubuntu-latest
-
+        permissions:
+            contents: read
         steps:
             - uses: actions/checkout@v4
               with:
@@ -134,13 +147,15 @@ jobs:
                       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
     # ---------------------------------------------------------
-    # 6) Deploy Vercel (solo si TODO lo anterior pasó)
+    # 6) Deploy Vercel
     # ---------------------------------------------------------
     deploy:
         needs: [lint, build, jest, cypress, sonar]
         runs-on: ubuntu-latest
         if: success()
         environment: Production
+        permissions:
+            contents: read
 
         steps:
             - name: Trigger Vercel Deploy Webhook

@@ -27,7 +27,7 @@ describe('Ahorcado', () => {
   });
 });
 
-//Necesito una instancia nueva para no interferir con los otros tests
+
 
 describe('Ahorcado - Nuevos tests', () => {
   const juego = new Ahorcado('gato');
@@ -39,7 +39,7 @@ describe('Ahorcado - Nuevos tests', () => {
   it('Palabra inicial con guiones', () => {
     expect(juego.mostrar_progreso_palabra()).toBe(
       '_'.repeat(juego.informar_palabra_secreta().length)
-    ); //Mostraria "- - - - -"
+    ); 
   });
 
   it('Mostrar progreso de la palabra', () => {
@@ -98,7 +98,6 @@ describe('Ahorcado - Test en progreso', () => {
   });
 });
 
-// Reiniciar juego, hago una instancia completa con el juego ganado
 
 describe('Ahorcado - Reiniciar juego', () => {
   const juego = new Ahorcado('casa');
@@ -128,7 +127,7 @@ describe('Ahorcado - Mostrar letras acertadas', () => {
   const juego = new Ahorcado('barco');
   juego.adivinar_letra('b');
   juego.adivinar_letra('a');
-  juego.adivinar_letra('x'); // Letra errada
+  juego.adivinar_letra('x'); 
 
   it('Deberia mostrar las letras acertadas', () => {
     expect(juego.mostrar_letras_acertadas()).toEqual(['b', 'a']);

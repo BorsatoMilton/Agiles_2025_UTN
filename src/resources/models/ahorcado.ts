@@ -69,9 +69,7 @@ export class Ahorcado {
       .split('')
       .map((l) => (this.letrasAcertadas.includes(l) ? l : '_'))
       .join('');
-  } // Explico la funcion por si no se entiende: Toma la palabraSecreta,
-  //  crea un array con sus letras (split), luego mapea con cada letra (map)
-  // y verifica si estan incluidas, si estan devuelve la letra, caso contrario devuelve "-", y finalmente une todo en un string (join).
+  } 
   public es_victoria_o_es_derrota(): 'victoria' | 'derrota' | 'en progreso' {
     if (this.mostrar_progreso_palabra() === this.palabraSecreta) {
       return 'victoria';
