@@ -89,7 +89,7 @@ El repositorio está integrado con **SonarCloud** y **CodeQL** mediante GitHub A
 * Tests unitarios (Jest)
 * Tests E2E (Cypress)
 * Análisis SonarCloud y CodeQL
-* Deploy **Bloqueo de deploy si los Actions fallan**
+* Vercel Deploy **Bloqueo de deploy si los Actions fallan**
 
 El deploy a Vercel solo ocurre si:
 
